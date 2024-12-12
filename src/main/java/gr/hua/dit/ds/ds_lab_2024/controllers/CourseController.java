@@ -2,7 +2,6 @@ package gr.hua.dit.ds.ds_lab_2024.controllers;
 
 
 import gr.hua.dit.ds.ds_lab_2024.entities.Course;
-import gr.hua.dit.ds.ds_lab_2024.entities.Semester;
 import gr.hua.dit.ds.ds_lab_2024.entities.Student;
 import gr.hua.dit.ds.ds_lab_2024.entities.Teacher;
 import gr.hua.dit.ds.ds_lab_2024.repositories.CourseRepository;

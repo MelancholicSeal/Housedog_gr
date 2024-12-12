@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DsLab2024Application<ds-lab-2024>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "gr.hua.dit.ds.ds_lab_2024.DsLab2024Application",
+            "projectName": "ds-lab-2024",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
