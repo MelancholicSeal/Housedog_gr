@@ -8,7 +8,7 @@ import java.util.List;
 @Table
 public class Teacher {
 
-    private int x;
+    private int y;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
