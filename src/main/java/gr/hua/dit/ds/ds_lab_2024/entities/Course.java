@@ -20,9 +20,6 @@ public class Course {
     @Size(min = 3, max = 50)
     private String title;
 
-    @Enumerated
-    private Semester semester;
-
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="teacher_id")
@@ -55,14 +52,6 @@ public class Course {
         this.title = title;
     }
 
-    public Semester getSemester() {
-        return semester;
-    }
-
-    public void setSemester(Semester semester) {
-        this.semester = semester;
-    }
-
     public Teacher getTeacher() {
         return teacher;
     }
@@ -83,9 +72,8 @@ public class Course {
         students.add(student);
     }
 
-    public Course(String title, Semester semester) {
-        this.title = title;
-        this.semester = semester;
+    public Course(String title) {
+        this.title = title; 
     }
 
     public Course() {
@@ -96,7 +84,6 @@ public class Course {
         return "Course{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", semester=" + semester +
                 ", teacher=" + teacher +
                 '}';
     }
