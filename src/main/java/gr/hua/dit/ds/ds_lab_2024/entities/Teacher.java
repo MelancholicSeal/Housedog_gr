@@ -8,10 +8,13 @@ import java.util.List;
 @Table
 public class Teacher {
 
+    private int x;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
 
     @Column(name = "title")
     private String title;
