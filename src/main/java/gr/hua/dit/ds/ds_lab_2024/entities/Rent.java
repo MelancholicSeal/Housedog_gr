@@ -49,6 +49,9 @@ public class Rent {
         this.payment = payment;
     }
 
+    public Rent(){
+    }
+
     public Rent(int id, Date start_date, Date end_date, float payment) {
         this.id = id;
         this.start_date = start_date;
