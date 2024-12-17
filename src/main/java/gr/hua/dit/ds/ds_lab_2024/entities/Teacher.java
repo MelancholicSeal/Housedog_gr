@@ -9,7 +9,7 @@ import java.util.List;
 public class Teacher {
 
     private int y;
-
+    private String hello="Gia sou mano elpizv auto to mhnima na se vriskei kala";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
