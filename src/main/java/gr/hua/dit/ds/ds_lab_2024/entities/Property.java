@@ -49,7 +49,7 @@ public class Property {
 
     public Property() {}
 
-    public String getAddress() {
+    public String getaddress() {
         return address;
     }
 
@@ -65,14 +65,6 @@ public class Property {
         return available;
     }
 
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
     public void setType(String type) {
         this.type = type;
     }
@@ -85,7 +77,7 @@ public class Property {
         this.city = city;
     }
 
-    public void setAddress(String address) {
+    public void setaddress(String address) {
         this.address = address;
     }
 }

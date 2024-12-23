@@ -7,8 +7,6 @@ import java.util.List;
 @Entity
 @Table
 public class Owner extends User{
-
-
     @OneToMany(mappedBy = "owner")
     private List<Property> Properties;
 }
