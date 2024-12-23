@@ -15,7 +15,7 @@ public class Property {
     @NotBlank
     @Size(max = 50)
     @Column
-    private String addres;
+    private String address;
 
     @NotBlank
     @Size(max = 20)
@@ -34,23 +34,23 @@ public class Property {
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
-    public Property(String addres, String city, String type, Owner owner) {
-        this.addres = addres;
+    public Property(String address, String city, String type, Owner owner) {
+        this.address = address;
         this.city = city;
         this.type = type;
         this.owner = owner;
     }
 
-    public Property(String addres, String city, Owner owner) {
-        this.addres = addres;
+    public Property(String address, String city, Owner owner) {
+        this.address = address;
         this.city = city;
         this.owner = owner;
     }
 
     public Property() {}
 
-    public String getAddres() {
-        return addres;
+    public String getAddress() {
+        return address;
     }
 
     public String getCity() {
@@ -65,6 +65,14 @@ public class Property {
         return available;
     }
 
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -77,7 +85,7 @@ public class Property {
         this.city = city;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
