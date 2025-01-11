@@ -4,6 +4,7 @@ import gr.hua.dit.ds.ds_lab_2024.entities.Owner;
 import gr.hua.dit.ds.ds_lab_2024.service.OwnerService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/owner")
@@ -26,31 +27,26 @@ public class OwnerRestController {
 //    }
 
     @RequestMapping()
-    public String showOwners(Model model) {
-        model.addAttribute("owners", ownerService.getOwners());
-        return "owner/owners";
+    public List <Owner> showOwners(Model model) {
+        return ownerService.getOwners();
     }
 
     @GetMapping("/{id}")
-    public String showOwner(@PathVariable Integer id, Model model){
-        Owner owner = ownerService.getOwner(id);
-        model.addAttribute("owners", owner);
-        return "owner/owners";
+    public Owner showOwner(@PathVariable Integer id, Model model){
+        return ownerService.getOwner(id);
     }
 
     @GetMapping("/new")
-    public String addOwner(Model model){
+    public Owner addOwner(Model model){
         Owner owner = new Owner();
-        model.addAttribute("owner", owner);
-        return "owner/owners";
+        return owner;
 
     }
 
     @PostMapping("/new")
-    public String saveOwners(@ModelAttribute("course") Owner owner, Model model) {
+    public Owner saveOwner(@ModelAttribute("property") Owner owner, Model model) {
         ownerService.saveOwner(owner);
-        model.addAttribute("owners", ownerService.getOwners());
-        return "owner/owners";
+        return owner;
     }
 
 }
