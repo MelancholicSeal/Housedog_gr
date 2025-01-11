@@ -18,16 +18,8 @@ public class PropertyRestController {
         this.propertyService = propertyService;
     }
 
-    //    @PostConstruct
-//    public void setup() {
-//       Teacher t1 = new Teacher("Prof","Mark","Tailor","mark@company.com");
-//       Teacher t2 = new Teacher("Lec","John","Marmor","john@example.com");
-//
-//       teacherService.saveTeacher(t1);
-//       teacherService.saveTeacher(t2);
-//    }
 
-    @RequestMapping()
+    @GetMapping()
     public List<Property> showProperties(Model model) {
         return propertyService.getProperty();
     }
