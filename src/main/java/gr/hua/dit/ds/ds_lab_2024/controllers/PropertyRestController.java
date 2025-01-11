@@ -2,18 +2,19 @@ package gr.hua.dit.ds.ds_lab_2024.controllers;
 
 import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import gr.hua.dit.ds.ds_lab_2024.service.PropertyService;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("property")
-public class PropertyController {
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/property")
+public class PropertyRestController {
 
 
     private PropertyService propertyService;
 
-    public PropertyController(PropertyService propertyService) {
+    public PropertyRestController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
 
@@ -27,24 +28,19 @@ public class PropertyController {
 //    }
 
     @RequestMapping()
-    public String showTeachers(Model model) {
-        model.addAttribute("teachers", propertyService.getProperty());
-        return "teacher/teachers";
+    public List<Property> showProperties(Model model) {
+        return propertyService.getProperty();
     }
 
     @GetMapping("/{id}")
-    public String showTeacher(@PathVariable Integer id, Model model){
-        Property property = propertyService.getProperty(id);
-        model.addAttribute("teachers", property);
-        return "teacher/teachers";
+    public Property showProperty(@PathVariable Integer id, Model model){
+        return propertyService.getProperty(id);
     }
 
-    @GetMapping("/new")
-    public String addTeacher(Model model){
-        Property property = new Property();
-        model.addAttribute("teacher", property);
-        return "teacher/teacher";
-
+    @PostMapping("/new")
+    public Property createProperty(@RequestBody Property property){
+        propertyService.saveProperty(property);
+        return property;
     }
 
     /*
