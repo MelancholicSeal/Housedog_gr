@@ -23,7 +23,7 @@ public class RentService {
     }
 
     @Transactional
-    public void saveStudent(Rent rent) {
+    public void saveRent(Rent rent) {
         rentRepository.save(rent);
     }
 
