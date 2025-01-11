@@ -26,8 +26,10 @@ public class RentRestController {
     @PostMapping("")
     public Rent createRent(@RequestBody Rent rent) {
         rentService.saveRent(rent);
+
         return rent;
-    } 
+    }
+
     
     @GetMapping("/{id}")
     public Rent getRentId(@PathVariable int id) {
