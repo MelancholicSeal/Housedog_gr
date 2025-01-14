@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
+@DiscriminatorValue("owner")
 public class Owner extends User{
     @OneToMany(mappedBy = "owner")
     private List<Property> Properties;

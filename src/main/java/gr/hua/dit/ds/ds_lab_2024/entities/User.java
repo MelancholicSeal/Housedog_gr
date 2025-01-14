@@ -8,7 +8,8 @@ import jakarta.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="IsOwner")
 @Entity
 @Table(	name = "users",
         uniqueConstraints = {
