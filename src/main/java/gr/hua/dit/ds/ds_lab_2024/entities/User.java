@@ -105,7 +105,7 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName(String firstName) {
+    public String getFirstName() {
         return firstName;
     }
     
@@ -113,7 +113,7 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastName(String lastName) {
+    public String getLastName() {
         return lastName;
     }
 
@@ -121,7 +121,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getPhoneNumber(String phoneNumber) {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -129,7 +129,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAFM(String AFM){
+    public String getAFM(){
         return AFM;
     }
     
@@ -137,7 +137,7 @@ public class User {
         this.AFM = AFM;
     }
 
-    public String getIDNumber(String idNumber) {
+    public String getIDNumber() {
         return idNumber;
     }
 
