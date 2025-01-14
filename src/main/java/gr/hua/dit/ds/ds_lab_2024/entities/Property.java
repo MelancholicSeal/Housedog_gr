@@ -13,6 +13,12 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    public int getId() {
+        return id;
+    }
+
+
+
     @NotBlank
     @Size(max = 50)
     @Column
@@ -35,6 +41,7 @@ public class Property {
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
+
     public Property(String address, String city, String type, Owner owner) {
         this.address = address;
         this.city = city;
@@ -50,7 +57,7 @@ public class Property {
 
     public Property() {}
 
-    public String getaddress() {
+    public String getAddress() {
         return address;
     }
 
@@ -86,7 +93,7 @@ public class Property {
         this.city = city;
     }
 
-    public void setaddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 }

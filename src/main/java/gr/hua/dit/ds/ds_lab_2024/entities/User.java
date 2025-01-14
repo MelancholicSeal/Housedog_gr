@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

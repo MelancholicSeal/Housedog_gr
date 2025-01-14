@@ -1,6 +1,7 @@
 package gr.hua.dit.ds.ds_lab_2024.controllers;
 
 import gr.hua.dit.ds.ds_lab_2024.entities.Rent;
+import gr.hua.dit.ds.ds_lab_2024.service.PropertyService;
 import gr.hua.dit.ds.ds_lab_2024.service.RentService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RentRestController {
     
     private RentService rentService;
+    private PropertyService propertyService;
 
     public RentRestController(RentService rentService) {
         this.rentService = rentService;
@@ -26,7 +28,6 @@ public class RentRestController {
     @PostMapping("")
     public Rent createRent(@RequestBody Rent rent) {
         rentService.saveRent(rent);
-
         return rent;
     }
 

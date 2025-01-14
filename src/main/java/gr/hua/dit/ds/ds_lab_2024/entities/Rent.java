@@ -57,13 +57,31 @@ public class Rent {
         this.payment = payment;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
     public Rent(){
     }
 
-    public Rent(int id, Date start_date, Date end_date, float payment) {
+    public Rent(int id, Date start_date, Date end_date, float payment, User user, Property property) {
         this.id = id;
         this.start_date = start_date;
         this.end_date = end_date;
         this.payment = payment;
+        this.user = user;
+        this.property = property;
     }
 }
