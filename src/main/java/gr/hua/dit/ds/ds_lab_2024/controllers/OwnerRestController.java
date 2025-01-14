@@ -36,12 +36,7 @@ public class OwnerRestController {
         return ownerService.getOwner(id);
     }
 
-    @GetMapping("/new")
-    public Owner addOwner(Model model){
-        Owner owner = new Owner();
-        return owner;
 
-    }
 
     @PostMapping("/new")
     public Owner saveOwner(@ModelAttribute("property") Owner owner, Model model) {

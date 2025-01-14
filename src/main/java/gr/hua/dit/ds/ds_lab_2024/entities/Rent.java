@@ -21,6 +21,14 @@ public class Rent {
     @Column(name = "payment")
     private float payment;
 
+    @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "property_id", nullable = false)
+    private Property property;
+
     public int getId() {
         return id;
     }
