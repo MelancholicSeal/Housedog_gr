@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/property")
@@ -34,6 +37,20 @@ public class PropertyRestController {
         propertyService.saveProperty(property);
         return property;
     }
+
+    @PutMapping("/{property_id}")
+    public Property updateProperty(@PathVariable int property_id, @RequestBody Property propertyDetails) {
+        Property property = (Property) propertyService.getProperty(property_id);
+
+        property.setAddress(propertyDetails.getAddress());
+        property.setAvailable(propertyDetails.getAvailable());
+        property.setCity(propertyDetails.getCity());
+        property.setOwner(propertyDetails.getOwner());
+        property.setType(propertyDetails.getType());
+        propertyService.updateProperty(property);
+        return property;
+    }
+    
 
     /*
     @PostMapping("/new")

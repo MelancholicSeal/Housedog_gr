@@ -1,7 +1,6 @@
 package gr.hua.dit.ds.ds_lab_2024.service;
 
 import gr.hua.dit.ds.ds_lab_2024.entities.Property;
-/*import gr.hua.dit.ds.ds_lab_2024.entities.Student;*/
 import gr.hua.dit.ds.ds_lab_2024.entities.Owner;
 import gr.hua.dit.ds.ds_lab_2024.repositories.PropertyRepository;
 import gr.hua.dit.ds.ds_lab_2024.repositories.OwnerRepository;
@@ -31,6 +30,12 @@ public class PropertyService {
     @Transactional
     public void saveProperty(Property property) {
         propertyRepository.save(property);
+    }
+
+    @Transactional
+    public int updateProperty(Property property) {
+       property = propertyRepository.save(property);
+       return property.getId(); 
     }
 
     @Transactional
