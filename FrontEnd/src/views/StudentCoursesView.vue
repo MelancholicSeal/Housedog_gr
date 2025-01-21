@@ -7,15 +7,15 @@ const backendEnvVar = import.meta.env.VITE_BACKEND;
 const router = useRouter();
 const route = useRoute();
 
-const studentIdRef = ref(null);
+const userIdRef = ref(null);
 const urlRef = computed(() => {
-    return '/api/student/' + studentIdRef.value + '/courses';
+    return '/api/user/' + userIdRef.value + '/properties';
 });
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 onMounted(() => {
-    studentIdRef.value = route.params.id;
+    userIdRef.value = route.params.id;
     performRequest();
 });
 </script>
@@ -25,8 +25,8 @@ onMounted(() => {
         <table class="table">
             <thead>
                 <tr>
-                    <!-- <th>Course ID</th> -->
-                    <th>Course Title</th>
+                    <!-- <th>Property ID</th> -->
+                    <th>Property Title</th>
                 </tr>
             </thead>
             <tbody v-if="loading">
@@ -35,9 +35,9 @@ onMounted(() => {
                 </tr>
             </tbody>
             <tbody v-if="data">
-                <tr v-for="course in data._embedded.courses">
-                    <!-- <th>{{ course.id }}</th> -->
-                    <td>{{ course.title }}</td>
+                <tr v-for="property in data._embedded.properties">
+                    <!-- <th>{{ property.id }}</th> -->
+                    <td>{{ property.title }}</td>
                 </tr>
             </tbody>
         </table>

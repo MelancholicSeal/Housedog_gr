@@ -8,10 +8,10 @@ const router = useRouter();
 
 // @EXERCISE : Add teacher (dropdown - load data [background], pre-process data, show data in dropdown)
 const formDataRef = ref({
-    title: '',
-    semester: ''
+    adress: '',
+    city: ''
 });
-const urlRef = ref(backendEnvVar + '/api/course');
+const urlRef = ref(backendEnvVar + '/api/property');
 const authRef = ref(true);
 const methodRef = ref('POST');
 
@@ -20,7 +20,7 @@ const { data, performRequest } = useRemoteData(urlRef, authRef, methodRef, formD
 const onSubmit = () => {
     performRequest()
         .then((data) => {
-            router.push({ name: 'courses' });
+            router.push({ name: 'properties' });
         })
         .catch((ignored) => {
             // TODO Handle error.
@@ -34,33 +34,33 @@ const onSubmit = () => {
             <div class="row py-4 px-3">
                 <div class="col-12">
                     <div class="mb-4">
-                        <RouterLink class="small" :to="{ name: 'courses' }"
-                            >Back to Courses</RouterLink
+                        <RouterLink class="small" :to="{ name: 'properties' }"
+                            >Back to Properties</RouterLink
                         >
-                        <h1 class="fs-3">New Course</h1>
+                        <h1 class="fs-3">New Property</h1>
                     </div>
                     <div>
                         <div class="mb-2">
-                            <label for="firstName">Title</label>
+                            <label for="firstName">Address</label>
                             <input
                                 class="form-control"
                                 id="firstName"
-                                v-model="formDataRef.title"
+                                v-model="formDataRef.address"
                                 type="text"
                             />
                         </div>
                         <div class="mb-2">
-                            <label for="lastName">Semester</label>
+                            <label for="lastName">City</label>
                             <input
                                 class="form-control"
                                 id="lastName"
-                                v-model="formDataRef.semester"
+                                v-model="formDataRef.city"
                                 type="text"
                             />
                         </div>
                         <div class="">
                             <button class="btn btn-primary" @click="onSubmit" type="button">
-                                Create new course
+                                Create new property
                             </button>
                         </div>
                     </div>

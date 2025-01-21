@@ -5,7 +5,7 @@ const backendEnvVar = import.meta.env.VITE_BACKEND;
 
 // @EXERCISE : Create dynamic pagination mechanism page=PAGE size=SIZE
 // + create a generic reusable component.
-const urlRef = ref(backendEnvVar + '/api/course?page=0&size=100');
+const urlRef = ref(backendEnvVar + '/api/property?page=0&size=100');
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
@@ -22,7 +22,7 @@ onMounted(() => {
                     <div class="mb-4">
                         <RouterLink class="small" :to="{ name: 'home' }">Back to Home</RouterLink>
                         <h1 class="fs-3">Courses</h1>
-                        <RouterLink class="small" :to="{ name: 'course-new' }"
+                        <RouterLink class="small" :to="{ name: 'property-new' }"
                             >Create Course</RouterLink
                         >
                     </div>
@@ -30,20 +30,20 @@ onMounted(() => {
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <!-- <th>Course ID</th> -->
-                                    <th>Course Title</th>
+                                    <!-- <th>Property ID</th> -->
+                                    <th>Property Address</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody v-if="data">
-                                <tr v-for="course in data">
-                                    <td>{{ course.title }}</td>
+                                <tr v-for="property in data">
+                                    <td>{{ property.address }}</td>
                                     <td>
-                                        <!-- TODO course.id -->
+                                        <!-- TODO property.id -->
                                         <RouterLink
                                             :to="{
-                                                name: 'course-details',
-                                                params: { id: course.id }
+                                                name: 'property-details',
+                                                params: { id: property.id }
                                             }"
                                         >
                                             Display
