@@ -47,9 +47,9 @@ onMounted(() => {
                 <td>
                   <RouterLink
                       :to="{
-                                                name: 'user-details',
-                                                params: { id: user.id }
-                                            }"
+                          name: 'user-details',
+                          params: { id: user.id }
+                      }"
                   >Display</RouterLink
                   >
                 </td>
