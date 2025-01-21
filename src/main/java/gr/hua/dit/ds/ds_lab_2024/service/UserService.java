@@ -35,7 +35,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public Integer saveUser(User user) {
+    public Long saveUser(User user) {
         String passwd= user.getPassword();
         String encodedPassword = passwordEncoder.encode(passwd);
         user.setPassword(encodedPassword);
@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public Integer updateUser(User user) {
+    public Long updateUser(User user) {
         user = userRepository.save(user);
         return user.getId();
     }
