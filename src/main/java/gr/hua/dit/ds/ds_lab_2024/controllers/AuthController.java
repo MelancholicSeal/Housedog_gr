@@ -5,7 +5,7 @@ import gr.hua.dit.ds.ds_lab_2024.payload.request.LoginRequest;
 import gr.hua.dit.ds.ds_lab_2024.payload.response.JwtResponse;
 import gr.hua.dit.ds.ds_lab_2024.repositories.RoleRepository;
 import gr.hua.dit.ds.ds_lab_2024.repositories.UserRepository;
-import gr.hua.dit.ds.ds_lab_2024.service.UserService;
+import gr.hua.dit.ds.ds_lab_2024.service.UserDetailsImpl;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -66,7 +66,7 @@ public class AuthController {
         String jwt = jwtUtils.generateJwtToken(authentication);
         System.out.println("jwt: " + jwt);
 
-        UserService userDetails = (UserService) authentication.getPrincipal();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
@@ -95,7 +95,12 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getFirstName(),
+                signUpRequest.getLastName(),
+                signUpRequest.getPhoneNumber(),
+                signUpRequest.getAFM(),
+                signUpRequest.getIdNumber());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

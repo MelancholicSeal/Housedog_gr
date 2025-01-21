@@ -32,7 +32,7 @@ public class UserRestController {
 
     @PostMapping("/register")
     public User registerUser(@RequestBody User user) {
-        Integer id = userService.saveUser(user);
+        Long id = userService.saveUser(user);
         return userService.getUser(Long.valueOf(id));
     }
 
