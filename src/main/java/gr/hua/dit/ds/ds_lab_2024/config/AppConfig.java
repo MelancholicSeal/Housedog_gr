@@ -20,6 +20,12 @@ public class AppConfig {
         return new BCryptPasswordEncoder();
     }
 
+    private SecurityScheme createAPIKeyScheme() {
+        return new SecurityScheme().type(SecurityScheme.Type.HTTP)
+                .bearerFormat("JWT")
+                .scheme("bearer");
+    }
+
     @Bean
     public OpenAPI openAPI() {
         OpenAPI info = new OpenAPI().addSecurityItem(new SecurityRequirement().
@@ -27,17 +33,13 @@ public class AppConfig {
                 .components(new Components().addSecuritySchemes
                         ("Bearer Authentication", createAPIKeyScheme()))
                 .info(new Info().title("DS LAB 2024 REST API")
-                        .description("This API is used in dl-lab-2024 project")
-                        .version("1.0").contact(new Contact().name("Anargyros Tsadimas")
-                                .email("tsadimas@hua.gr").url("https://tsadimas.github.io"))
+                        .description("This API is used in ds-lab-2024 project")
+                        .version("1.0").contact(new Contact().name("")
+                                .email("").url("https://github.com/MelancholicSeal/Housedog_gr"))
                         .license(new License().name("License of API")
                                 .url("https://swagger.io/license/")));
         return info;
     }
 
-    private SecurityScheme createAPIKeyScheme() {
-        return new SecurityScheme().type(SecurityScheme.Type.HTTP)
-                .bearerFormat("JWT")
-                .scheme("bearer");
-    }
+
 }
