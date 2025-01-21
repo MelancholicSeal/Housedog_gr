@@ -55,23 +55,17 @@ public class UserService implements UserDetailsService {
         user = userRepository.save(user);
         return user.getId();
     }
-    @Override
+
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> opt = userRepository.findByUsername(username);
 
         if(opt.isEmpty())
-            throw new UsernameNotFoundException("User with email: " +username +" not found !");
+            throw new UsernameNotFoundException("User with username: " +username +" not found !");
         else {
             User user = opt.get();
-            return new org.springframework.security.core.userdetails.User(
-                    user.getEmail(),
-                    user.getPassword(),
-                    user.getRoles()
-                            .stream()
-                            .map(role-> new SimpleGrantedAuthority(role.toString()))
-                            .collect(Collectors.toSet())
-            );
+
+            return UserDetailsImpl.build(user);
         }
     }
 

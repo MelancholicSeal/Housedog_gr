@@ -55,7 +55,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser( @RequestBody LoginRequest loginRequest) {
         System.out.println("authentication");
 
         Authentication authentication = authenticationManager.authenticate(
