@@ -7,13 +7,13 @@ const route = useRoute();
 
 const courseIdRef = ref(null);
 const urlRef = computed(() => {
-    return backendEnvVar + '/api/course/' + courseIdRef.value + '/students';
+    return backendEnvVar + '/api/property/' + propertyIdRef.value + '/users';
 });
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 onMounted(() => {
-    courseIdRef.value = route.params.id;
+    propertyIdRef.value = route.params.id;
     performRequest();
 });
 </script>
@@ -26,16 +26,17 @@ onMounted(() => {
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
-                    <th>Action</th>
+                    <th>Phone Number</th>
                 </tr>
             </thead>
             <tbody v-if="data">
-                <tr v-for="student in data" :key="student.id">
-                    <td>{{ student.firstName }}</td>
-                    <td>{{ student.lastName }}</td>
-                    <td>{{ student.email }}</td>
+                <tr v-for="user in data" :key="user.id">
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phoneNumber}}</td>
                     <td>
-                        <RouterLink :to="{ name: 'student-details', params: { id: student.id } }"
+                        <RouterLink :to="{ name: 'user-details', params: { id: user.id } }"
                             >Display</RouterLink
                         >
                     </td>

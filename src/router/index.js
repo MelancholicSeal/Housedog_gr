@@ -19,73 +19,73 @@ const router = createRouter({
             meta: { requiresAuth: true }
         },
         {
-            path: '/students',
-            name: 'students',
-            component: () => import('../views/StudentsView.vue'),
+            path: '/users',
+            name: 'users',
+            component: () => import('../views/UsersView.vue'),
             meta: { requiresAuth: true }
         },
         {
-            path: '/students/new',
-            name: 'student-new',
-            component: () => import('../views/CreateStudentView.vue'),
+            path: '/users/new',
+            name: 'user-new',
+            component: () => import('../views/CreateUserView.vue'),
             meta: { requiresAuth: true }
         },
         {
-            path: '/students/:id',
-            name: 'student',
-            component: () => import('../views/StudentView.vue'),
+            path: '/users/:id',
+            name: 'user',
+            component: () => import('../views/UserView.vue'),
             meta: { requiresAuth: true },
             children: [
                 {
                     path: '',
-                    name: 'student-details',
-                    component: () => import('../views/StudentDetailsView.vue'),
+                    name: 'user-details',
+                    component: () => import('../views/UserDetailsView.vue'),
                     meta: { requiresAuth: true }
                 },
                 {
-                    path: 'courses',
-                    name: 'student-courses',
-                    component: () => import('../views/StudentCoursesView.vue'),
+                    path: 'properties',
+                    name: 'user-properties',
+                    component: () => import('../views/UserPropertiesView.vue'),
                     meta: { requiresAuth: true }
                 }
             ]
         },
         {
-            path: '/course/:id',
-            name: 'course',
-            component: () => import('../views/CourseView.vue'),
+            path: '/property/:id',
+            name: 'property',
+            component: () => import('../views/PropertyView.vue'),
             meta: { requiresAuth: true },
             children: [
                 {
                     path: '',
-                    name: 'course-details',
-                    component: () => import('../views/CourseDetailsView.vue'),
+                    name: 'property-details',
+                    component: () => import('../views/PropertyDetailsView.vue'),
                     meta: { requiresAuth: true }
                 },
                 {
-                    path: 'students',
-                    name: 'course-students',
-                    component: () => import('../views/CourseStudentsView.vue'),
+                    path: 'users',
+                    name: 'property-users',
+                    component: () => import('../views/PropertyUsersView.vue'),
                     meta: { requiresAuth: true }
                 },
                 {
                     path: 'delete',
-                    name: 'course-delete',
-                    component: () => import('../views/CourseDeleteView.vue'),
+                    name: 'property-delete',
+                    component: () => import('../views/PropertyDeleteView.vue'),
                     meta: { requiresAuth: true }
                 }
             ]
         },
         {
-            path: '/courses/new',
-            name: 'course-new',
-            component: () => import('../views/CreateCourceView.vue'),
+            path: '/properties/new',
+            name: 'property-new',
+            component: () => import('../views/CreatePropertyView.vue'),
             meta: { requiresAuth: true }
         },
         {
-            path: '/courses',
-            name: 'courses',
-            component: () => import('../views/CoursesView.vue'),
+            path: '/properties',
+            name: 'properties',
+            component: () => import('../views/PropertiesView.vue'),
             meta: { requiresAuth: true }
         },
         {
