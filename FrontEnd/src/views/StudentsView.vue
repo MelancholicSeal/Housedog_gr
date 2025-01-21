@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
-const urlRef = ref('/api/user');
+const urlRef = ref('/api/student');
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
@@ -18,7 +18,7 @@ onMounted(() => {
             <div class="row py-4 px-3">
                 <div class="col-12">
                     <div class="mb-4">
-                        <h1 class="fs-3">Users</h1>
+                        <h1 class="fs-3">Students</h1>
                     </div>
                     <div>
                         <table class="table">
@@ -28,7 +28,6 @@ onMounted(() => {
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
-                                    <th>Phone Number</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -38,17 +37,16 @@ onMounted(() => {
                                 </tr>
                             </tbody>
                             <tbody v-if="data">
-                                <tr v-for="user in data._embedded.users">
-                                    <td>{{ user.id }}</td>
-                                    <td>{{ user.firstName }}</td>
-                                    <td>{{ user.lastName }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.phoneNumber}}</td>
+                                <tr v-for="student in data._embedded.students">
+                                    <td>{{ student.id }}</td>
+                                    <td>{{ student.firstName }}</td>
+                                    <td>{{ student.lastName }}</td>
+                                    <td>{{ student.email }}</td>
                                     <td>
                                         <RouterLink
                                             :to="{
-                                                name: 'user-details',
-                                                params: { id: user.id }
+                                                name: 'student-details',
+                                                params: { id: student.id }
                                             }"
                                             >Display</RouterLink
                                         >

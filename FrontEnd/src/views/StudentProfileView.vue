@@ -6,15 +6,15 @@ import { useRemoteData } from '@/composables/useRemoteData.js';
 const router = useRouter();
 const route = useRoute();
 
-const userIdRef = ref(null);
+const studentIdRef = ref(null);
 const urlRef = computed(() => {
-    return +'/user/' + userIdRef.value + '/profile';
+    return +'/student/' + studentIdRef.value + '/profile';
 });
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 onMounted(() => {
-    userIdRef.value = route.params.id;
+    studentIdRef.value = route.params.id;
     performRequest();
 });
 </script>

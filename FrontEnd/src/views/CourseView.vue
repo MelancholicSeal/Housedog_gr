@@ -7,7 +7,7 @@ const route = useRoute();
 const courseIdRef = ref(null);
 
 onMounted(() => {
-    propertyIdRef.value = route.params.id;
+    courseIdRef.value = route.params.id;
 });
 </script>
 
@@ -17,31 +17,31 @@ onMounted(() => {
             <div class="row py-4 px-3">
                 <div class="col-12">
                     <div class="mb-4">
-                        <RouterLink class="small" :to="{ name: 'properties' }"
-                            >Back to Properties</RouterLink
+                        <RouterLink class="small" :to="{ name: 'courses' }"
+                            >Back to Courses</RouterLink
                         >
-                        <h1 class="fs-3">Course #{{ propertyIdRef }}</h1>
+                        <h1 class="fs-3">Course #{{ courseIdRef }}</h1>
                     </div>
                     <div class="mb-4">
                         <ul class="nav border">
                             <li class="nav-item">
                                 <RouterLink
                                     class="nav-link"
-                                    :to="{ name: 'property-details', params: { id: propertyIdRef } }"
+                                    :to="{ name: 'course-details', params: { id: courseIdRef } }"
                                     >Details</RouterLink
                                 >
                             </li>
                             <li class="nav-item">
                                 <RouterLink
                                     class="nav-link"
-                                    :to="{ name: 'property-users', params: { id: propertyIdRef } }"
-                                    >Users</RouterLink
+                                    :to="{ name: 'course-students', params: { id: courseIdRef } }"
+                                    >Students</RouterLink
                                 >
                             </li>
                             <li class="nav-item">
                                 <RouterLink
                                     class="nav-link"
-                                    :to="{ name: 'property-delete', params: { id: propertyIdRef } }"
+                                    :to="{ name: 'course-delete', params: { id: courseIdRef } }"
                                     >Delete</RouterLink
                                 >
                             </li>

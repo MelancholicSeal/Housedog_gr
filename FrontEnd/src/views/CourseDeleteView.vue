@@ -7,15 +7,15 @@ const backendEnvVar = import.meta.env.VITE_BACKEND;
 const router = useRouter();
 const route = useRoute();
 
-const propertyIdRef = ref(null);
+const courseIdRef = ref(null);
 const urlRef = computed(() => {
-    return backendEnvVar + '/api/course/' + propertyIdRef.value;
+    return backendEnvVar + '/api/course/' + courseIdRef.value;
 });
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 const urlRefDelete = computed(() => {
-    return backendEnvVar + '/api/property/' + propertyIdRef.value;
+    return backendEnvVar + '/api/course/' + courseIdRef.value;
 });
 const { performRequest: performRequestDelete } = useRemoteData(
     urlRefDelete,
@@ -24,7 +24,7 @@ const { performRequest: performRequestDelete } = useRemoteData(
 );
 
 onMounted(() => {
-    propertyIdRef.value = route.params.id;
+    courseIdRef.value = route.params.id;
     performRequest();
 });
 
@@ -32,7 +32,7 @@ const onDelete = () => {
     // TODO Confirm.
     performRequestDelete()
         .then((data) => {
-            router.push({ name: 'properties' });
+            router.push({ name: 'courses' });
         })
         .catch((ignored) => {
             // TODO Handle.
@@ -43,7 +43,7 @@ const onDelete = () => {
     <div>
         <div v-if="data">
             <button class="btn btn-danger" @click="onDelete">
-                Delete property {{ data.title }} <small>({{ data.id }})</small>
+                Delete course {{ data.title }} <small>({{ data.id }})</small>
             </button>
         </div>
     </div>

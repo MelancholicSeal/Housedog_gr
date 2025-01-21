@@ -18,11 +18,11 @@ const { userData } = useApplicationStore();
                         <ul>
                             <!-- TODO enable.
                             <li>
-                                <RouterLink :to="{ name: 'users' }">Manage Users</RouterLink>
+                                <RouterLink :to="{ name: 'students' }">Manage Students</RouterLink>
                             </li>
                             -->
                             <li>
-                                <RouterLink :to="{ name: 'properties' }">Manage Properties</RouterLink>
+                                <RouterLink :to="{ name: 'courses' }">Manage Courses</RouterLink>
                             </li>
                         </ul>
                     </div>

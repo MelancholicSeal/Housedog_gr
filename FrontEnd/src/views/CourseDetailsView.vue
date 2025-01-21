@@ -7,15 +7,15 @@ const backendEnvVar = import.meta.env.VITE_BACKEND;
 const router = useRouter();
 const route = useRoute();
 
-const propertyIdRef = ref(null);
+const courseIdRef = ref(null);
 const urlRef = computed(() => {
-    return backendEnvVar + '/api/property/' + propertyIdRef.value;
+    return backendEnvVar + '/api/course/' + courseIdRef.value;
 });
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
 
 onMounted(() => {
-    propertyIdRef.value = route.params.id;
+    courseIdRef.value = route.params.id;
     performRequest();
 });
 </script>
@@ -28,16 +28,12 @@ onMounted(() => {
                     <td>{{ data.id }}</td>
                 </tr>
                 <tr>
-                    <th>Address</th>
-                    <td>{{ data.address }}</td>
+                    <th>Title</th>
+                    <td>{{ data.title }}</td>
                 </tr>
                 <tr>
-                    <th>City</th>
-                    <td>{{ data.city }}</td>
-                </tr>
-                <tr>
-                    <th>Available</th>
-                    <td>{{ data.available}}</td>
+                    <th>Semester</th>
+                    <td>{{ data.semester }}</td>
                 </tr>
             </tbody>
         </table>
