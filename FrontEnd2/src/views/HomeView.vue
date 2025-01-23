@@ -22,7 +22,7 @@ const { userData } = useApplicationStore();
                             </li>
                             -->
                             <li>
-                                <RouterLink :to="{ name: 'courses' }">Manage Courses</RouterLink>
+                                <RouterLink :to="{ name: 'properties' }">Manage Properties</RouterLink>
                             </li>
                         </ul>
                     </div>

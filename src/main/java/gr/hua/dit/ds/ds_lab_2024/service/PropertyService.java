@@ -28,6 +28,14 @@ public class PropertyService {
     }
 
     @Transactional
+    public List<Property> searchProperty(List<String> Cities, Boolean available, List<String> Type){
+        return propertyRepository.findByCityInAndAvailableAndTypeIn(Cities,available,Type);
+    }
+    public List<String> distinctCities(){
+        return propertyRepository.findDistinctCities();
+    }
+
+    @Transactional
     public void saveProperty(Property property) {
         propertyRepository.save(property);
     }

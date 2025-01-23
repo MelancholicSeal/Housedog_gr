@@ -17,7 +17,7 @@ const credentials = ref({
     firstName: '',
     lastName: '',
     phoneNumber: '',
-    AFM: '',
+    afm: '',
     idNumber: ''
 });
 const errorMessage = ref('');
@@ -154,7 +154,7 @@ onBeforeMount(() => {
                         >AFM</label
                         >
                         <input
-                            v-model="credentials.AFM"
+                            v-model="credentials.afm"
                             type="text"
                             class="form-control"
                             id="AFMFormControl"
