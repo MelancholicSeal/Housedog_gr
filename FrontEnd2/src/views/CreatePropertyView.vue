@@ -2,16 +2,21 @@
 import { ref } from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 import { useRouter } from 'vue-router';
+import { useApplicationStore } from '@/stores/application.js';
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
 const router = useRouter();
+const applicationStore = useApplicationStore();
+const userId = applicationStore.userData?.id;
+
 
 // @EXERCISE : Add teacher (dropdown - load data [background], pre-process data, show data in dropdown)
 const formDataRef = ref({
     address: '',
     city: '',
     type: '',
-    available: true
+    available: true,
+    userId: userId || null
 });
 const urlRef = ref(backendEnvVar + '/api/property/new');
 const authRef = ref(true);
@@ -89,16 +94,3 @@ const onSubmit = () => {
         </div>
     </div>
 </template>
-
-<script>
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const formDataRef = ref({
-      available: false,
-    });
-    return { formDataRef };
-  },
-};
-</script>
