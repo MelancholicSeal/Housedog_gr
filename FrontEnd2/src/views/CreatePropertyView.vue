@@ -9,7 +9,9 @@ const router = useRouter();
 // @EXERCISE : Add teacher (dropdown - load data [background], pre-process data, show data in dropdown)
 const formDataRef = ref({
     address: '',
-    city: ''
+    city: '',
+    type: '',
+    available: true
 });
 const urlRef = ref(backendEnvVar + '/api/property/new');
 const authRef = ref(true);
@@ -58,6 +60,22 @@ const onSubmit = () => {
                                 type="text"
                             />
                         </div>
+                      <div class="mb-2">
+                        <label for="type">Type</label>
+                        <input
+                            class="form-control"
+                            id="type"
+                            v-model="formDataRef.type"
+                            type="text"
+                        />
+                      </div>
+                      <div>
+                        <label>
+                          <input type="checkbox" v-model="formDataRef.available" />
+                          Available:
+                        </label>
+                        <p>Checkbox value: {{ formDataRef.available }}</p>
+                      </div>
                         <div class="">
                             <button class="btn btn-primary" @click="onSubmit" type="button">
                                 Create new property
@@ -71,3 +89,16 @@ const onSubmit = () => {
         </div>
     </div>
 </template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const formDataRef = ref({
+      available: false,
+    });
+    return { formDataRef };
+  },
+};
+</script>
