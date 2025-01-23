@@ -98,6 +98,11 @@ const router = createRouter({
             name: 'logout',
             component: () => import('../views/LogoutView.vue'),
             meta: { requiresAuth: true }
+        },
+        {
+            path: '/signup',
+            name: 'signup',
+            component: () => import('../views/SignupView.vue'),
         }
     ]
 });
