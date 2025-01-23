@@ -11,7 +11,7 @@ const formDataRef = ref({
     address: '',
     city: ''
 });
-const urlRef = ref(backendEnvVar + '/api/property');
+const urlRef = ref(backendEnvVar + '/api/property/new');
 const authRef = ref(true);
 const methodRef = ref('POST');
 

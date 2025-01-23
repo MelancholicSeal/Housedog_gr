@@ -71,7 +71,7 @@ const router = createRouter({
                 {
                     path: 'delete',
                     name: 'course-delete',
-                    component: () => import('../views/CourseDeleteView.vue'),
+                    component: () => import('../views/PropertyDeleteView.vue'),
                     meta: { requiresAuth: true }
                 }
             ]
@@ -83,9 +83,9 @@ const router = createRouter({
             meta: { requiresAuth: true }
         },
         {
-            path: '/courses',
+            path: '/properties',
             name: 'courses',
-            component: () => import('../views/CoursesView.vue'),
+            component: () => import('../views/PropertiesView.vue'),
             meta: { requiresAuth: true }
         },
         {
