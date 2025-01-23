@@ -8,7 +8,7 @@ const formDataRef = ref({
     lastName: '',
     email: ''
 });
-const urlRef = ref(backendEnvVar + '/student');
+const urlRef = ref(backendEnvVar + '/user');
 const authRef = ref(true);
 const methodRef = ref('POST');
 
@@ -21,7 +21,7 @@ const onSubmit = () => {
 
 <template>
     <div class="container mb-4">
-        <h1>New Student</h1>
+        <h1>New User</h1>
     </div>
     <div>
         <pre>{{ data }}</pre>
@@ -46,7 +46,7 @@ const onSubmit = () => {
         </div>
         <div class="">
             <button class="btn btn-primary" @click="onSubmit" type="button">
-                Create new student
+                Create new user
             </button>
         </div>
     </div>
