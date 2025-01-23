@@ -77,7 +77,7 @@ const router = createRouter({
             ]
         },
         {
-            path: '/courses/new',
+            path: '/property/new',
             name: 'course-new',
             component: () => import('../views/CreatePropertyView.vue'),
             meta: { requiresAuth: true }
