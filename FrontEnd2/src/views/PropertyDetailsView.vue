@@ -9,7 +9,7 @@ const route = useRoute();
 
 const courseIdRef = ref(null);
 const urlRef = computed(() => {
-    return backendEnvVar + '/api/course/' + courseIdRef.value;
+    return backendEnvVar + '/api/property/' + propertyIdRef.value;
 });
 const authRef = ref(true);
 const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
@@ -28,12 +28,20 @@ onMounted(() => {
                     <td>{{ data.id }}</td>
                 </tr>
                 <tr>
-                    <th>Title</th>
-                    <td>{{ data.title }}</td>
+                    <th>Address</th>
+                    <td>{{ data.address }}</td>
                 </tr>
                 <tr>
-                    <th>Semester</th>
-                    <td>{{ data.semester }}</td>
+                    <th>City</th>
+                    <td>{{ data.city }}</td>
+                </tr>
+                <tr>
+                  <th>Type</th>
+                  <td>{{ data.type }}</td>
+                </tr>
+                <tr>
+                  <th>Available</th>
+                  <td>{{ data.available }}</td>
                 </tr>
             </tbody>
         </table>
