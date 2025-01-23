@@ -33,7 +33,7 @@ const router = createRouter({
         {
             path: '/students/:id',
             name: 'student',
-            component: () => import('../views/StudentView.vue'),
+            component: () => import('../views/UserView.vue'),
             meta: { requiresAuth: true },
             children: [
                 {

@@ -4,10 +4,10 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-const studentIdRef = ref(null);
+const userIdRef = ref(null);
 
 onMounted(() => {
-    studentIdRef.value = route.params.id;
+    userIdRef.value = route.params.id;
 });
 </script>
 
@@ -17,25 +17,25 @@ onMounted(() => {
             <div class="row py-4 px-3">
                 <div class="col-12">
                     <div class="mb-4">
-                        <RouterLink class="small" :to="{ name: 'students' }"
-                            >Back to Students</RouterLink
+                        <RouterLink class="small" :to="{ name: 'users' }"
+                            >Back to Users</RouterLink
                         >
-                        <h1 class="fs-3">Student #{{ studentIdRef }}</h1>
+                        <h1 class="fs-3">User #{{ userIdRef }}</h1>
                     </div>
                     <div class="mb-4">
                         <ul class="nav border">
                             <li class="nav-item">
                                 <RouterLink
                                     class="nav-link"
-                                    :to="{ name: 'student-details', params: { id: studentIdRef } }"
+                                    :to="{ name: 'user-details', params: { id: userIdRef } }"
                                     >Details</RouterLink
                                 >
                             </li>
                             <li class="nav-item">
                                 <RouterLink
                                     class="nav-link"
-                                    :to="{ name: 'student-courses', params: { id: studentIdRef } }"
-                                    >Courses</RouterLink
+                                    :to="{ name: 'user-properties', params: { id: userIdRef } }"
+                                    >Properties</RouterLink
                                 >
                             </li>
                         </ul>
