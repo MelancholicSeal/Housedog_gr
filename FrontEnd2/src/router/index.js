@@ -53,7 +53,7 @@ const router = createRouter({
         {
             path: '/property/:id',
             name: 'property',
-            component: () => import('../views/CourseView.vue'),
+            component: () => import('../views/PropertyDetailsView.vue'),
             meta: { requiresAuth: true },
             children: [
                 {
@@ -64,7 +64,7 @@ const router = createRouter({
                 },
                 {
                     path: 'students',
-                    name: 'course-students',
+                    name: 'property-students',
                     component: () => import('../views/CourseStudentsView.vue'),
                     meta: { requiresAuth: true }
                 },

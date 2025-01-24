@@ -13,16 +13,18 @@ const userId = applicationStore.userData?.id;
 // @EXERCISE : Add teacher (dropdown - load data [background], pre-process data, show data in dropdown)
 const formDataRef = ref({
     address: '',
-    city: '',
-    type: '',
     available: true,
-    userId: userId || null
+    city: '',
+    owner:{
+      id: userId
+    },
+    type: ''
 });
 const urlRef = ref(backendEnvVar + '/api/property/new');
 const authRef = ref(true);
 const methodRef = ref('POST');
-
-const { data, performRequest } = useRemoteData(urlRef, authRef, methodRef, formDataRef);
+const data = ref(null);
+const { loading, performRequest } = useRemoteData(urlRef, authRef,data, methodRef, formDataRef);
 
 const onSubmit = () => {
     performRequest()

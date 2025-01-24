@@ -27,6 +27,26 @@ public class PropertyRestController {
         return propertyService.getProperty();
     }
 
+    @GetMapping("/filter")
+    public List<Property> filterProperties(
+            @RequestParam(required = false) List<String> cities,
+            @RequestParam(required = false) List<String> types,
+            @RequestParam(required = false) Boolean available
+    ) {
+        System.out.println("cities: " + cities);
+        return propertyService.searchProperty(cities,available,types);
+    }
+
+    @GetMapping("/cities")
+    public List<String> getCities(Model model) {
+        return propertyService.distinctCities();
+    }
+
+    @GetMapping("/types")
+    public List<String> getPropertyTypes(Model model) {
+        return propertyService.distinctPropertyTypes();
+    }
+
     @GetMapping("/{id}")
     public Property showProperty(@PathVariable Integer id, Model model){
         return propertyService.getProperty(id);

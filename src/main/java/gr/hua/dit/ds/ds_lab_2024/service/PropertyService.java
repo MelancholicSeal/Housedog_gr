@@ -36,6 +36,11 @@ public class PropertyService {
     }
 
     @Transactional
+    public List<String> distinctPropertyTypes() {
+        return propertyRepository.findDistinctPropertyTypes();
+    }
+
+    @Transactional
     public void saveProperty(Property property) {
         propertyRepository.save(property);
     }
@@ -50,6 +55,8 @@ public class PropertyService {
     public Property getProperty(Integer propertyId) {
         return propertyRepository.findById(propertyId).get();
     }
+
+
 
     @Transactional
     public void assignOwnerToProperty(int propertyId, Owner owner) {
@@ -67,6 +74,8 @@ public class PropertyService {
         property.setOwner(null);
         propertyRepository.save(property);
     }
+
+
 
     /*
     @Transactional

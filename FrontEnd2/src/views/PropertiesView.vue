@@ -1,19 +1,61 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import {onMounted, ref, watch} from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
 // @EXERCISE : Create dynamic pagination mechanism page=PAGE size=SIZE
 // + create a generic reusable component.
 const urlRef = ref(backendEnvVar + '/api/property?page=0&size=100');
+const urlRefCity = ref(backendEnvVar + '/api/property/cities');
+const urlRefType = ref(backendEnvVar + '/api/property/types');
 const authRef = ref(true);
-const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
-const { cities, loading2, performRequest2 } = useRemoteData(urlRef, authRef);
+const data = ref(null);
+const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
+const cities = ref(null);
+const {loading2, performRequest: CitiesData } = useRemoteData(urlRefCity, authRef,cities);
+const propertytypes = ref(null);
+const {loading3, performRequest: PropertyTypeData } = useRemoteData(urlRefType, authRef, propertytypes);
 
+const selectedCities = ref([]);
+const selectedTypes = ref([]);
+const selectedAvailability = ref(false);
+
+const showFilters = ref(false);
 onMounted(() => {
-    performRequest();
+  CitiesData();
+  PropertyData();
+  PropertyTypeData();
+  console.log(data);
 });
+
+
+const applyFilters = () => {
+  console.log("Applied Filters:");
+  console.log("Selected Cities:", selectedCities.value);
+  console.log("Selected Types:", selectedTypes.value);
+  console.log("Availability:", selectedAvailability.value);
+  const filterParams = [];
+
+  if (selectedCities.value.length) {
+    filterParams.push(`cities=${selectedCities.value.join(',')}`);
+  }
+  if (selectedTypes.value.length) {
+    filterParams.push(`types=${selectedTypes.value.join(',')}`);
+  }
+  if (selectedAvailability.value !== null) {
+    filterParams.push(`available=${selectedAvailability.value}`);
+  }
+
+  // Construct the URL with query parameters
+  const filtersUrl = `?${filterParams.join('&')}`;
+  const urlRef = ref(backendEnvVar + '/api/property/filter' + filtersUrl);
+  const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
+  PropertyData();
+  console.log(filtersUrl);
+};
 </script>
+
+
 
 <template>
     <div class="bg-body-tertiary">
@@ -27,16 +69,45 @@ onMounted(() => {
                             >Create Property</RouterLink
                         >
                     </div>
-                    <div class="checkbox-group">
-                      <label v-for="category in categories" :key="category.id">
-                        <input
-                            type="checkbox"
-                            :value="category.id"
-                            v-model="selectedCategories"
-                        />
-                        {{ category.name }}
-                      </label>
-                    </div>
+                  <button @click="showFilters = !showFilters" class="btn btn-primary mb-3">
+                    {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
+                  </button>
+
+                  <div v-show="showFilters" class="checkbox-group-cities">
+                    <label v-for="(city, index) in cities" :key="index">
+                      <input
+                          type="checkbox"
+                          :value="city"
+                          v-model="selectedCities"
+                      />
+                      {{ city }}
+                    </label>
+                  </div>
+
+                  <div v-show="showFilters" class="checkbox-group-av">
+                      <input
+                          type="checkbox"
+                          :value="true"
+                          v-model="selectedAvailability"
+                      />
+                      Available
+                  </div>
+
+                  <div v-show="showFilters" class="checkbox-group-type">
+                    <label v-for="(type, index) in propertytypes" :key="index">
+                      <input
+                          type="checkbox"
+                          :value="type"
+                          v-model="selectedTypes"
+                      />
+                      {{ type }}
+                    </label>
+                  </div>
+
+                  <button v-show="showFilters" @click="applyFilters" class="btn btn-primary mt-3">
+                    Apply Filters
+                  </button>
+
                     <div>
                         <table class="table">
                             <thead>
@@ -70,41 +141,3 @@ onMounted(() => {
     </div>
 </template>
 
-<script>
-export default {
-  name: 'App',
-  data() {
-    return {
-      // Data for categories
-      categories: [
-        { id: 1, name: 'Electronics' },
-        { id: 2, name: 'Furniture' },
-        { id: 3, name: 'Clothing' }
-      ],
-
-      // Data for items to filter
-      items: [
-        { id: 1, name: 'Laptop', category: 'Electronics' },
-        { id: 2, name: 'Sofa', category: 'Furniture' },
-        { id: 3, name: 'T-shirt', category: 'Clothing' },
-        { id: 4, name: 'Phone', category: 'Electronics' },
-        { id: 5, name: 'Chair', category: 'Furniture' },
-      ],
-
-      // Selected categories for filtering
-      selectedCategories: []
-    };
-  },
-  computed: {
-    // Computed property for filtered items
-    filteredItems() {
-      if (this.selectedCategories.length === 0) {
-        return this.items;
-      }
-      return this.items.filter(item =>
-          this.selectedCategories.includes(this.categories.find(c => c.name === item.category)?.id)
-      );
-    }
-  }
-};
-</script>

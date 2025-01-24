@@ -12,11 +12,12 @@ const urlRef = computed(() => {
     return backendEnvVar + '/api/property/' + propertyIdRef.value;
 });
 const authRef = ref(true);
-const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
+const data = ref(null);
+const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
 
 onMounted(() => {
     propertyIdRef.value = route.params.id;
-    performRequest();
+    PropertyData();
 });
 </script>
 <template>

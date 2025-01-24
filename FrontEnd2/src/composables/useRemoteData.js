@@ -3,12 +3,12 @@ import { useApplicationStore } from '@/stores/application.js';
 
 const store = useApplicationStore();
 
-export function useRemoteData(urlRef, authRef, methodRef = ref('GET'), bodyRef = ref(null)) {
-    const data = ref(null);
+export function useRemoteData(urlRef, authRef, dataRef, methodRef = ref('GET'), bodyRef = ref(null)) {
     const error = ref(null);
     const loading = ref(false);
 
     const performRequest = () => {
+        loading.value = true;
         const headers = {
             'Content-Type': 'application/json'
         };
@@ -28,20 +28,23 @@ export function useRemoteData(urlRef, authRef, methodRef = ref('GET'), bodyRef =
         return fetch(urlRef.value, config)
             .then((response) => {
                 if (response.ok) {
-                    response.json().then((responseData) => {
-                        data.value = responseData;
-                    });
+                    return response.json();
                 }
-                return Promise.resolve(data.value);
+                throw new Error('Failed to fetch');
+            })
+            .then((responseData) => {
+                dataRef.value = responseData;  // Assign response to the external `dataRef`
             })
             .catch((err) => {
                 error.value = err;
-                return Promise.reject(error.value);
             })
             .finally(() => {
                 loading.value = false;
             });
     };
 
-    return { data, error, loading, performRequest };
+    return { error, loading, performRequest };
+
 }
+
+
