@@ -19,18 +19,18 @@ const credentials = ref({
     phoneNumber: '',
     afm: '',
     idNumber: '',
-    role: ''
+    role: ["User"]
 });
 const errorMessage = ref('');
 
 const onRoleChange = (event) => {
-  formDataRef.value.role = event.target.checked ? "Owner" : "User";
+  credentials.role = event.target.checked ? ["Owner"] : ["User"];
 };
 
 const onFormSubmit = () => {
     loading.value = true;
     errorMessage.value = '';
-
+    console.log(credentials);
     fetch('http://localhost:8080/api/auth/signup', {
         method: 'POST',
         headers: {
