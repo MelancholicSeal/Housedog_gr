@@ -63,6 +63,12 @@ const router = createRouter({
                     meta: { requiresAuth: true }
                 },
                 {
+                    path: '/rent',
+                    name: 'rent-property',
+                    component: () => import('../views/RequestRent.vue'),
+                    meta: { requiresAuth: true }
+                },
+                {
                     path: 'students',
                     name: 'property-students',
                     component: () => import('../views/CourseStudentsView.vue'),

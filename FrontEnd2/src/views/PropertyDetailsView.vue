@@ -44,6 +44,14 @@ onMounted(() => {
                   <th>Available</th>
                   <td>{{ data.available }}</td>
                 </tr>
+                <tr>
+                  <th></th>
+                  <td>
+                    <router-link
+                        :to="{ name: 'rent-property', params: { id: data.id } }" class="btn btn-primary">Rent Property
+                    </router-link>
+                  </td>
+                </tr>
             </tbody>
         </table>
         <pre>{{ data }}</pre>
