@@ -4,6 +4,7 @@ import { useRemoteData } from '@/composables/useRemoteData.js';
 import {useRoute, useRouter} from 'vue-router';
 import { useApplicationStore } from '@/stores/application.js';
 import {routes} from "vue-router/auto-routes";
+import DatePicker from 'primevue/datepicker';
 
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 const route = useRoute();
