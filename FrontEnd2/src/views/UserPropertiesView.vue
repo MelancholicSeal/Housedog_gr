@@ -11,8 +11,9 @@ const userIdRef = ref(null);
 const urlRef = computed(() => {
     return '/api/user/' + userIdRef.value + '/properties';
 });
+
 const authRef = ref(true);
-const { data, loading, performRequest } = useRemoteData(urlRef, authRef);
+const { data, loading, performRequest } = useRemoteData(urlRef, authRef, availRef);
 
 onMounted(() => {
     userIdRef.value = route.params.id;
@@ -25,19 +26,22 @@ onMounted(() => {
         <table class="table">
             <thead>
                 <tr>
-                    <!-- <th>Course ID</th> -->
                     <th>Property Address</th>
+                    <th>Property City</th>
+                    <th>Property Type</th>
+                    <th>Property Availability</th>
                 </tr>
             </thead>
             <tbody v-if="loading">
                 <tr>
-                    <td colspan="1">Loading...</td>
+                    <td colspan="4">Loading...</td>
                 </tr>
             </tbody>
             <tbody v-if="data">
                 <tr v-for="property in data._embedded.properties">
-                    <!-- <th>{{ property.id }}</th> -->
                     <td>{{ property.address }}</td>
+                    <td>{{ property.city }}</td>
+                    <td>{{ property.type }}</td>
                 </tr>
             </tbody>
         </table>
