@@ -1,6 +1,7 @@
 <script setup>
 import {onMounted, ref, watch} from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
 // @EXERCISE : Create dynamic pagination mechanism page=PAGE size=SIZE
@@ -28,6 +29,9 @@ onMounted(() => {
   console.log(data);
 });
 
+const applicationStore = useApplicationStore();
+const userRoles = applicationStore.userData.roles;
+console.log(userRoles);
 
 const applyFilters = () => {
   console.log("Applied Filters:");
@@ -39,8 +43,15 @@ const applyFilters = () => {
   if (selectedCities.value.length) {
     filterParams.push(`cities=${selectedCities.value.join(',')}`);
   }
+  else{
+    filterParams.push(`cities=${cities._rawValue.join(',')}`);
+  }
   if (selectedTypes.value.length) {
+    console.log(cities);
     filterParams.push(`types=${selectedTypes.value.join(',')}`);
+  }
+  else{
+    filterParams.push(`types=${propertytypes._rawValue.join(',')}`);
   }
   if (selectedAvailability.value !== null) {
     filterParams.push(`available=${selectedAvailability.value}`);
@@ -49,9 +60,10 @@ const applyFilters = () => {
   // Construct the URL with query parameters
   const filtersUrl = `?${filterParams.join('&')}`;
   const urlRef = ref(backendEnvVar + '/api/property/filter' + filtersUrl);
+  console.log(filtersUrl);
   const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
   PropertyData();
-  console.log(filtersUrl);
+
 };
 </script>
 
@@ -65,9 +77,8 @@ const applyFilters = () => {
                     <div class="mb-4">
                         <RouterLink class="small" :to="{ name: 'home' }">Back to Home</RouterLink>
                         <h1 class="fs-3">Properties</h1>
-                        <RouterLink class="small" :to="{ name: 'property-new' }"
-                            >Create Property</RouterLink
-                        >
+                        <RouterLink class="small" :to="{ name: 'property-new' }" v-if="userRoles === 'ROLE_OWNER'"
+                            >Create Property</RouterLink>
                     </div>
                   <button @click="showFilters = !showFilters" class="btn btn-primary mb-3">
                     {{ showFilters ? 'Hide Filters' : 'Show Filters' }}

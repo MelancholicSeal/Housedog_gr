@@ -16,4 +16,6 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
 
     @Query("SELECT DISTINCT p.type FROM Property p")
     List<String> findDistinctPropertyTypes();
+
+    List<Property> findByCityInAndTypeIn(List<String> cities, List<String> type);
 }

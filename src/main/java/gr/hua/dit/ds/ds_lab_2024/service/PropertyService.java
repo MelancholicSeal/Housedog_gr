@@ -29,7 +29,10 @@ public class PropertyService {
 
     @Transactional
     public List<Property> searchProperty(List<String> Cities, Boolean available, List<String> Type){
-        return propertyRepository.findByCityInAndAvailableAndTypeIn(Cities,available,Type);
+        if(available) {
+            return propertyRepository.findByCityInAndAvailableAndTypeIn(Cities, true, Type);
+        }
+        return propertyRepository.findByCityInAndTypeIn(Cities, Type);
     }
     public List<String> distinctCities(){
         return propertyRepository.findDistinctCities();
