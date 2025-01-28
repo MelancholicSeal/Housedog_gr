@@ -49,9 +49,11 @@ public class AuthController {
     public void setup() {
         Role role_user = new Role("ROLE_USER");
         Role role_admin = new Role("ROLE_ADMIN");
+        Role role_owner = new Role("ROLE_OWNER");
 
         roleRepository.updateOrInsert(role_user);
         roleRepository.updateOrInsert(role_admin);
+        roleRepository.updateOrInsert(role_owner);
     }
 
     @PostMapping("/signin")
@@ -105,6 +107,7 @@ public class AuthController {
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
+        System.out.println("role: " + strRoles);
 
 
         if (strRoles == null) {
@@ -113,6 +116,7 @@ public class AuthController {
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
+                System.out.println("role: " + role);
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByName("ROLE_ADMIN")

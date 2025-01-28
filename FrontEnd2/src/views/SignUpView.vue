@@ -24,7 +24,7 @@ const credentials = ref({
 const errorMessage = ref('');
 
 const onRoleChange = (event) => {
-  credentials.role = event.target.checked ? ["Owner"] : ["User"];
+  credentials._rawValue.role = event.target.checked ? ["Owner"] : ["User"];
 };
 
 const onFormSubmit = () => {
