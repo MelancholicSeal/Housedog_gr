@@ -21,6 +21,17 @@ onMounted(() => {
     performRequest();
     console.log(data);
 });
+
+const updatePropertyAvailability = (propertyId, updatedAvailability) => {
+  const updateUrlRef = ref(`${backendEnvVar}/api/property/${propertyId}`);
+  const updateMethodRef = ref('PUT');
+  const updateBodyRef = ref({ available: updatedAvailability });
+
+  const { performRequest: performUpdate } = useRemoteData(updateUrlRef, authRef, ref(null), updateMethodRef, updateBodyRef);
+
+  performUpdate();
+};
+
 </script>
 
 <template>
@@ -48,6 +59,8 @@ onMounted(() => {
                       <input
                           type="checkbox"
                           :checked="property.available"
+
+                          @change="(e) => updatePropertyAvailability(property.id, e.target.checked)"
                       />
                     </td>
                 </tr>
