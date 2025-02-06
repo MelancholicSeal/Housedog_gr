@@ -23,9 +23,9 @@ onMounted(() => {
 });
 
 const updatePropertyAvailability = (propertyId, updatedAvailability) => {
-  const updateUrlRef = ref(`${backendEnvVar}/api/property/${propertyId}`);
+  const updateUrlRef = ref(`${backendEnvVar}/api/property/${propertyId}/changeAvailability`);
   const updateMethodRef = ref('PUT');
-  const updateBodyRef = ref({ available: updatedAvailability });
+  const updateBodyRef = ref({ propertyId });
 
   const { performRequest: performUpdate } = useRemoteData(updateUrlRef, authRef, ref(null), updateMethodRef, updateBodyRef);
 

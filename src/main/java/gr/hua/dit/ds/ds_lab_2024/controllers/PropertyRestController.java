@@ -74,6 +74,15 @@ public class PropertyRestController {
         propertyService.updateProperty(property);
         return property;
     }
+
+    @PutMapping("/{property_id}/changeAvailability")
+    public Property updateProperty(@PathVariable int property_id) {
+        Property property = (Property) propertyService.getProperty(property_id);
+
+        property.setAvailable(!property.getAvailable());
+        propertyService.updateProperty(property);
+        return property;
+    }
     
 
     /*
