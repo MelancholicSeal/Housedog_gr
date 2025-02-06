@@ -18,6 +18,16 @@ const applicationStore = useApplicationStore();
                     <!-- @EXERCISE: Add different color to active link (improve UX/UX). -->
                     <!-- @EXERCISE: Add different color to active link with nested routes (improve UX/UX). -->
                     <!-- @EXERCISE: Hide links that users has no access to. -->
+
+                    <li
+                        class="nav-item"
+                        v-if="applicationStore.isAuthenticated === true && applicationStore.userData?.role === 'ROLE_OWNER'"
+                    >
+                      <router-link :to="{ name: 'requests' }" class="nav-link text-white"
+                      >Requests</router-link
+                      >
+                    </li>
+
                     <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
                         <router-link :to="{ name: 'home' }" class="nav-link text-white"
                             >Home</router-link
@@ -32,7 +42,7 @@ const applicationStore = useApplicationStore();
                     -->
                     <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
                         <router-link :to="{ name: 'properties' }" class="nav-link text-white"
-                            >Courses</router-link
+                            >Properties</router-link
                         >
                     </li>
                     <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
