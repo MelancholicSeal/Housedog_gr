@@ -84,8 +84,11 @@ const applyFilters = () => {
                     {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
                   </button>
 
+
+
                   <div v-show="showFilters" class="checkbox-group-cities">
-                    <label v-for="(city, index) in cities" :key="index">
+                    <h6 style="font-weight: bold; text-decoration: underline; margin-bottom: 3px;">Cities</h6>
+                    <label v-for="(city, index) in cities" :key="index" style="margin-right: 10px">
                       <input
                           type="checkbox"
                           :value="city"
@@ -95,17 +98,21 @@ const applyFilters = () => {
                     </label>
                   </div>
 
+
                   <div v-show="showFilters" class="checkbox-group-av">
+                    <h6 style="font-weight: bold; text-decoration: underline; margin-bottom: 3px;">Availability</h6>
                       <input
                           type="checkbox"
                           :value="true"
                           v-model="selectedAvailability"
                       />
-                      Available
+                      Only Available
                   </div>
 
+
                   <div v-show="showFilters" class="checkbox-group-type">
-                    <label v-for="(type, index) in propertytypes" :key="index">
+                    <h6 style="font-weight: bold; text-decoration: underline; margin-bottom: 3px;">Property Type</h6>
+                    <label v-for="(type, index) in propertytypes" :key="index" style="margin-right: 10px">
                       <input
                           type="checkbox"
                           :value="type"
