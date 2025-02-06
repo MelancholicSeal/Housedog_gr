@@ -2,8 +2,6 @@ package gr.hua.dit.ds.ds_lab_2024.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity
 @Table
 public class Rent {
@@ -12,14 +10,8 @@ public class Rent {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "start_date")
-    private Date start_date;
-
-    @Column(name = "end_date")
-    private Date end_date;
-
-    @Column(name = "payment")
-    private float payment;
+    @Column(name = "rented")
+    private boolean rented;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -36,25 +28,12 @@ public class Rent {
         this.id = id;
     }
 
-    public Date getStart_date() {
-        return start_date;
-    }
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public boolean isRented() {
+        return rented;
     }
 
-    public Date getEnd_date() {
-        return end_date;
-    }
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
-    }
-
-    public float getPayment() {
-        return payment;
-    }
-    public void setPayment(float payment) {
-        this.payment = payment;
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 
     public void setUser(User user) {
@@ -73,14 +52,11 @@ public class Rent {
         this.property = property;
     }
 
-    public Rent(){
-    }
+    public Rent(){}
 
-    public Rent(int id, Date start_date, Date end_date, float payment, User user, Property property) {
+    public Rent(int id, Boolean rented, User user, Property property) {
         this.id = id;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.payment = payment;
+        this.rented = rented;
         this.user = user;
         this.property = property;
     }

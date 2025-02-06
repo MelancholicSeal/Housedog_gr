@@ -2,18 +2,49 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import { useApplicationStore } from '@/stores/application.js';
+
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
 const router = useRouter();
 const route = useRoute();
+const applicationStore = useApplicationStore();
+const userId = applicationStore.userData?.id;
+
 
 const propertyIdRef = ref(null);
 const urlRef = computed(() => {
     return backendEnvVar + '/api/property/' + propertyIdRef.value;
 });
+const urlRent = ref(backendEnvVar + '/api/rent/new');
 const authRef = ref(true);
 const data = ref(null);
+const rent_data = ref(null);
+const methodRef = ref('POST');
 const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
+const {loading2, performRequest: RentData } = useRemoteData(urlRent, authRef,rent_data, methodRef);
+
+const formDataRef = ref({
+  rented: false,
+  user: {
+    id: userId
+  },
+  property: {
+    id: propertyIdRef.value,
+  }
+});
+
+const onSubmit = () => {
+  rent_data.value = formDataRef.value;
+
+  RentData()
+      .then((response) => {
+        console.log('Rent created successfully:', response);
+      })
+      .catch((err) => {
+        console.error('Error creating rent:', err);
+      });
+}
 
 onMounted(() => {
     propertyIdRef.value = route.params.id;
@@ -47,9 +78,9 @@ onMounted(() => {
                 <tr>
                   <th></th>
                   <td>
-                    <router-link
-                        :to="{ name: 'rent-property', params: { id: data.id } }" class="btn btn-primary">Rent Property
-                    </router-link>
+                    <button @click="onSubmit" type ="button" class="btn btn-info btn-sm">
+                      Rent Property
+                    </button>
                   </td>
                 </tr>
             </tbody>

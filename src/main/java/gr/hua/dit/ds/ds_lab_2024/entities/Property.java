@@ -17,8 +17,6 @@ public class Property {
         return id;
     }
 
-
-
     @NotBlank
     @Size(max = 50)
     @Column

@@ -4,8 +4,6 @@ import { useRemoteData } from '@/composables/useRemoteData.js';
 import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
-// @EXERCISE : Create dynamic pagination mechanism page=PAGE size=SIZE
-// + create a generic reusable component.
 const urlRef = ref(backendEnvVar + '/api/property?page=0&size=100');
 const urlRefCity = ref(backendEnvVar + '/api/property/cities');
 const urlRefType = ref(backendEnvVar + '/api/property/types');

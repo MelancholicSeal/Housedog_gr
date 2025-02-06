@@ -25,7 +25,7 @@ public class RentRestController {
         return rentService.getRent();
     }
     
-    @PostMapping("")
+    @PostMapping("/new")
     public Rent createRent(@RequestBody Rent rent) {
         rentService.saveRent(rent);
         return rent;
