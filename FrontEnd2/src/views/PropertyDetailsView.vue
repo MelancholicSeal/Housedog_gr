@@ -22,21 +22,21 @@ const data = ref(null);
 const rent_data = ref(null);
 const methodRef = ref('POST');
 const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
-const {loading2, performRequest: RentData } = useRemoteData(urlRent, authRef,rent_data, methodRef);
 
-const formDataRef = ref({
-  rented: false,
-  user: {
-    id: userId
-  },
-  property: {
-    id: propertyIdRef.value,
-  }
-});
+
+
 
 const onSubmit = () => {
-  rent_data.value = formDataRef.value;
-
+  const formDataRef = ref({
+    rented: false,
+    user: {
+      id: userId
+    },
+    property: {
+      id: propertyIdRef.value,
+    }
+  });
+  const {loading2, performRequest: RentData } = useRemoteData(urlRent, authRef,rent_data, methodRef, formDataRef);
   RentData()
       .then((response) => {
         console.log('Rent created successfully:', response);

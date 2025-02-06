@@ -21,9 +21,9 @@ const applicationStore = useApplicationStore();
 
                     <li
                         class="nav-item"
-                        v-if="applicationStore.isAuthenticated === true && applicationStore.userData?.role === 'ROLE_OWNER'"
+                        v-if="applicationStore.isAuthenticated === true && applicationStore.userData?.roles?.includes('ROLE_OWNER')"
                     >
-                      <router-link :to="{ name: 'requests' }" class="nav-link text-white"
+                      <router-link :to="{ name: 'home' }" class="nav-link text-white"
                       >Requests</router-link
                       >
                     </li>
