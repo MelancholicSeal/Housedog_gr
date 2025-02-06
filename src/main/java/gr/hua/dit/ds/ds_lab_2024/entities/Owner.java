@@ -6,7 +6,17 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue("owner")
-public class Owner extends User{
+public class Owner extends User {
     @OneToMany(mappedBy = "owner")
     private List<Property> Properties;
+
+    public Owner(String username, String email, String password,
+                 String firstName, String lastName, String phoneNumber,
+                 String AFM, String idNumber) {
+        super(username, email, password, firstName, lastName, phoneNumber, AFM, idNumber);
+    }
+
+    public Owner() {
+
+    }
 }
