@@ -1,7 +1,9 @@
 package gr.hua.dit.ds.ds_lab_2024.service;
 
+import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import gr.hua.dit.ds.ds_lab_2024.entities.Role;
 import gr.hua.dit.ds.ds_lab_2024.entities.User;
+import gr.hua.dit.ds.ds_lab_2024.repositories.PropertyRepository;
 import gr.hua.dit.ds.ds_lab_2024.repositories.RoleRepository;
 import gr.hua.dit.ds.ds_lab_2024.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -25,6 +27,7 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     private RoleRepository roleRepository;
+
 
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -82,4 +85,6 @@ public class UserService implements UserDetailsService {
     public void updateOrInsertRole(Role role) {
         roleRepository.updateOrInsert(role);
     }
+
+
 }

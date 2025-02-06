@@ -1,6 +1,8 @@
 package gr.hua.dit.ds.ds_lab_2024.controllers;
 
 import gr.hua.dit.ds.ds_lab_2024.entities.Owner;
+import gr.hua.dit.ds.ds_lab_2024.entities.Property;
+import gr.hua.dit.ds.ds_lab_2024.entities.User;
 import gr.hua.dit.ds.ds_lab_2024.service.OwnerService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +34,7 @@ public class OwnerRestController {
     }
 
     @GetMapping("/{id}")
-    public Owner showOwner(@PathVariable Integer id, Model model){
+    public Owner showOwner(@PathVariable Long id, Model model){
         return ownerService.getOwner(id);
     }
 
@@ -42,6 +44,15 @@ public class OwnerRestController {
     public Owner saveOwner(@ModelAttribute("property") Owner owner, Model model) {
         ownerService.saveOwner(owner);
         return owner;
+    }
+
+    @GetMapping("/{user_id}/properties")
+    public List<Property> getProperties(@PathVariable Long user_id) {
+        Owner owner = (Owner) ownerService.getOwner(user_id);
+        if (owner == null) {
+            throw new RuntimeException("User not found with ID: " + user_id);
+        }
+        return ownerService.getProperties(owner);
     }
 
 }

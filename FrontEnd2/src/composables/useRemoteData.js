@@ -33,7 +33,8 @@ export function useRemoteData(urlRef, authRef, dataRef, methodRef = ref('GET'), 
                 throw new Error('Failed to fetch');
             })
             .then((responseData) => {
-                dataRef.value = responseData;  // Assign response to the external `dataRef`
+                dataRef.value = responseData;
+                return Promise.resolve(dataRef.value);// Assign response to the external `dataRef`
             })
             .catch((err) => {
                 error.value = err;

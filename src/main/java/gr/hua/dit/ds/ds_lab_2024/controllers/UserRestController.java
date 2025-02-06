@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.ds_lab_2024.controllers;
 
+import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import gr.hua.dit.ds.ds_lab_2024.entities.Role;
 import gr.hua.dit.ds.ds_lab_2024.entities.User;
 import gr.hua.dit.ds.ds_lab_2024.repositories.RoleRepository;
@@ -25,6 +26,7 @@ public class UserRestController {
 
     private RoleRepository roleRepository;
 
+
     public UserRestController(UserService userService, RoleRepository roleRepository) {
         this.userService = userService;
         this.roleRepository = roleRepository;
@@ -48,8 +50,10 @@ public class UserRestController {
             throw new RuntimeException("User not found with ID: " + user_id);
         }
         return user;
-    } 
-    
+    }
+
+
+
     @PutMapping("/{user_id}")
     public User updateUser(@PathVariable Long user_id, @RequestBody User userDetails) {
         User user = (User) userService.getUser(user_id);

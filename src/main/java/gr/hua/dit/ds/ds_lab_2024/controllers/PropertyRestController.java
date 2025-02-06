@@ -52,6 +52,10 @@ public class PropertyRestController {
         return propertyService.getProperty(id);
     }
 
+
+
+
+
     @PostMapping("/new")
     public Property createProperty(@RequestBody Property property){
         propertyService.saveProperty(property);

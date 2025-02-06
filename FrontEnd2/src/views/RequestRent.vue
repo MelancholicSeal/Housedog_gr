@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 import {useRoute, useRouter} from 'vue-router';
 import { useApplicationStore } from '@/stores/application.js';
-import {routes} from "vue-router/auto-routes";
 import DatePicker from 'primevue/datepicker';
 
 const backendEnvVar = import.meta.env.VITE_BACKEND;
@@ -31,14 +30,7 @@ const data = ref(null);
 const { loading, performRequest } = useRemoteData(urlRef, authRef,data, methodRef, formDataRef);
 
 const onSubmit = () => {
-    performRequest()
-        .then((data) => {
-            router.push({ name: 'home'});
-
-        })
-        .catch((ignored) => {
-            // TODO Handle error.
-        });
+ 
 };
 </script>
 

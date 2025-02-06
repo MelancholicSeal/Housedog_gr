@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.ds_lab_2024.repositories;
 
+import gr.hua.dit.ds.ds_lab_2024.entities.Owner;
 import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,6 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
     List<String> findDistinctPropertyTypes();
 
     List<Property> findByCityInAndTypeIn(List<String> cities, List<String> type);
+
+    List<Property> findByOwner(Owner id);
 }

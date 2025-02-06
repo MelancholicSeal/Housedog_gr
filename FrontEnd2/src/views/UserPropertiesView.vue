@@ -9,15 +9,17 @@ const route = useRoute();
 
 const userIdRef = ref(null);
 const urlRef = computed(() => {
-    return '/api/user/' + userIdRef.value + '/properties';
+    return backendEnvVar+'/api/owner/' + userIdRef.value + '/properties';
 });
 
 const authRef = ref(true);
-const { data, loading, performRequest } = useRemoteData(urlRef, authRef, availRef);
+const data = ref(null);
+const { loading, performRequest } = useRemoteData(urlRef, authRef, data);
 
 onMounted(() => {
     userIdRef.value = route.params.id;
     performRequest();
+    console.log(data);
 });
 </script>
 
@@ -38,10 +40,16 @@ onMounted(() => {
                 </tr>
             </tbody>
             <tbody v-if="data">
-                <tr v-for="property in data._embedded.properties">
+                <tr v-for="property in data">
                     <td>{{ property.address }}</td>
                     <td>{{ property.city }}</td>
                     <td>{{ property.type }}</td>
+                    <td>
+                      <input
+                          type="checkbox"
+                          :checked="property.available"
+                      />
+                    </td>
                 </tr>
             </tbody>
         </table>
