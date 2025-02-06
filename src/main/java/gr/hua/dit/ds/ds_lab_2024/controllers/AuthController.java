@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.ds_lab_2024.controllers;
 
+import gr.hua.dit.ds.ds_lab_2024.entities.Owner;
 import gr.hua.dit.ds.ds_lab_2024.entities.User;
 import gr.hua.dit.ds.ds_lab_2024.payload.request.LoginRequest;
 import gr.hua.dit.ds.ds_lab_2024.payload.response.JwtResponse;
@@ -134,18 +135,26 @@ public class AuthController {
                         Role ownerRole = roleRepository.findByName("ROLE_OWNER")
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(ownerRole);
-
+                        Owner owner = new Owner(signUpRequest.getUsername(),
+                                signUpRequest.getEmail(),
+                                encoder.encode(signUpRequest.getPassword()),
+                                signUpRequest.getFirstName(),
+                                signUpRequest.getLastName(),
+                                signUpRequest.getPhoneNumber(),
+                                signUpRequest.getAFM(),
+                                signUpRequest.getIdNumber());
+                        owner.setRoles(roles);
+                        userRepository.save(owner);
                         break;
                     default:
                         Role userRole = roleRepository.findByName("ROLE_USER")
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
+                        user.setRoles(roles);
+                        userRepository.save(user);
                 }
             });
         }
-
-        user.setRoles(roles);
-        userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
