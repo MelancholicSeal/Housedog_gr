@@ -147,37 +147,39 @@ const applyFilters = () => {
                   </button>
 
                     <div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <!-- <th>Course ID</th> -->
-                                    <th>Property</th>
-                                    <th>Actions</th>
-                                    <th v-if="userData?.roles?.includes('ROLE_ADMIN')">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody v-if="data">
-                                <tr v-for="property in data">
-                                    <td>{{ property.type+","+property.city+","+property.address+","+property.owner.username}}</td>
-                                    <td>
-                                        <!-- TODO course.id -->
-                                        <RouterLink
-                                            :to="{
-                                                name: 'property-details',
-                                                params: { id: property.id }
-                                            }"
-                                        >
-                                            Display
-                                        </RouterLink>
-                                    </td>
-                                    <td v-if="userData?.roles?.includes('ROLE_ADMIN')">
-                                      <button @click="onSubmit(property.id)" type ="button" class="btn btn-info btn-sm">
-                                        Delete Property
-                                      </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                      <table class="table">
+                        <thead>
+                        <tr>
+                          <th colspan="6" class="text-center fs-4">Properties</th>
+                        </tr>
+                        <tr>
+                          <th>Type</th>
+                          <th>City</th>
+                          <th>Address</th>
+                          <th>Owner</th>
+                          <th>Actions</th>
+                          <th v-if="userData?.roles?.includes('ROLE_ADMIN')">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody v-if="data">
+                        <tr v-for="property in data" :key="property.id">
+                          <td>{{ property.type }}</td>
+                          <td>{{ property.city }}</td>
+                          <td>{{ property.address }}</td>
+                          <td>{{ property.owner.username }}</td>
+                          <td>
+                            <RouterLink :to="{name: 'property-details', params: { id: property.id } }">
+                              View Details
+                            </RouterLink>
+                          </td>
+                          <td v-if="userData?.roles?.includes('ROLE_ADMIN')">
+                            <button @click="onSubmit(property.id)" type="button" class="btn btn-danger btn-sm">
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
                     </div>
                 </div>
             </div>
