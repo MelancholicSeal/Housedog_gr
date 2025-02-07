@@ -61,7 +61,7 @@ const onSubmit = (id) => {
               </thead>
               <tbody v-if="data">
               <tr v-for="user in data">
-                <td>{{ user.id + "," + user.username + "," + user.firstName + "," + user.lastName + "," + user.email + "," + user.phoneNumber + "," + user.afm + "," + user.idnumber}}</td>
+                <td>{{ 'User Id: ' + user.id + ", " + 'Username: ' + user.username + ", " + 'First Name: ' + user.firstName + ", " + 'Last Name: ' + user.lastName + ", " + 'Email: ' + user.email + ", " + 'Phone Number: ' + user.phoneNumber + ", " + 'AFM: ' + user.afm + ", " + 'Id Number: ' + user.idnumber}}</td>
                 <td v-if="userData?.roles?.includes('ROLE_ADMIN')">
                   <button @click="onSubmit(user.id)" type ="button" class="btn btn-info btn-sm">
                     Delete User
