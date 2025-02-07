@@ -37,12 +37,16 @@ const userRoles = applicationStore.userData.roles;
 console.log(userRoles);
 
 const onSubmit = (id) => {
-  const urlRefDelete = ref(backendEnvVar + + '/api/property' + id);
+  const urlRefDelete = ref(backendEnvVar + '/api/property/' + id);
   const methodRef = ref('DELETE');
-  const {loading5, performRequest: DeleteProperty } = useRemoteData(urlRefDelete, authRef, methodRef, data);
+  const {loading5, performRequest: DeleteProperty } = useRemoteData(urlRefDelete, authRef, data, methodRef);
   DeleteProperty()
       .then((res) => {
         console.log('Deleted Successfully!', res);
+        CitiesData();
+        PropertyData();
+        PropertyTypeData();
+        UserRoleData();
       })
       .catch((err) => {
         console.error('Error creating rent:', err);
@@ -149,6 +153,7 @@ const applyFilters = () => {
                                     <!-- <th>Course ID</th> -->
                                     <th>Property</th>
                                     <th>Actions</th>
+                                    <th v-if="userData?.roles?.includes('ROLE_ADMIN')">Delete</th>
                                 </tr>
                             </thead>
                             <tbody v-if="data">
@@ -165,7 +170,7 @@ const applyFilters = () => {
                                             Display
                                         </RouterLink>
                                     </td>
-                                    <td v-if="data.role === 'ROLE_ADMIN'" v-for="property in data">
+                                    <td v-if="userData?.roles?.includes('ROLE_ADMIN')">
                                       <button @click="onSubmit(property.id)" type ="button" class="btn btn-info btn-sm">
                                         Delete Property
                                       </button>

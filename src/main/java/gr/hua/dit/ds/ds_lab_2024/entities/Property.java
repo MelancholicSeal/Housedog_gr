@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table
 public class Property {
@@ -39,6 +41,8 @@ public class Property {
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rent> rents;
 
     public Property(String address, String city, String type, Owner owner) {
         this.address = address;
