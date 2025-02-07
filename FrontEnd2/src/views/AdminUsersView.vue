@@ -26,10 +26,12 @@ console.log(userRoles);
 const onSubmit = (id) => {
   const urlRefDelete = ref(backendEnvVar + '/api/users/' + id);
   const methodRef = ref('DELETE');
-  const {loading5, performRequest: DeleteUser } = useRemoteData(urlRefDelete, authRef, methodRef, data);
+  const {loading5, performRequest: DeleteUser } = useRemoteData(urlRefDelete, authRef, data, methodRef);
   DeleteUser()
       .then((res) => {
         console.log('Deleted Successfully!', res);
+        UserData();
+        UserRoleData();
       })
       .catch((err) => {
         console.error('Error creating rent:', err);
@@ -54,24 +56,13 @@ const onSubmit = (id) => {
               <tr>
                 <!-- <th>Course ID</th> -->
                 <th>User</th>
-                <th>Actions</th>
+                <th>Action</th>
               </tr>
               </thead>
               <tbody v-if="data">
               <tr v-for="user in data">
-                <td>{{ user.id + "," + user.username + "," + user.firstName + "," + user.lastName + "," + user.email + "," + user.phoneNumber + "," + user.afm + "," + user.idNumber}}</td>
-                <td>
-                  <!-- TODO course.id -->
-                  <RouterLink
-                      :to="{
-                                                name: 'user-details',
-                                                params: { id: user.id }
-                                            }"
-                  >
-                    Display
-                  </RouterLink>
-                </td>
-                <td v-if="data.role === 'ROLE_ADMIN'" v-for="user in data">
+                <td>{{ user.id + "," + user.username + "," + user.firstName + "," + user.lastName + "," + user.email + "," + user.phoneNumber + "," + user.afm + "," + user.idnumber}}</td>
+                <td v-if="userData?.roles?.includes('ROLE_ADMIN')">
                   <button @click="onSubmit(user.id)" type ="button" class="btn btn-info btn-sm">
                     Delete User
                   </button>

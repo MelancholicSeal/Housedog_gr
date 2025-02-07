@@ -41,7 +41,7 @@ onMounted(() => {
                     <p v-else-if="userData?.roles?.includes('ROLE_OWNER')" class="card-text"> Role: Owner</p>
                     <p v-else class="card-text"> Role: Admin</p>
                     <p v-if="userData?.roles?.includes('ROLE_OWNER')" class="card-text">
-                        <RouterLink :to="{ name: 'user-properties' }"> My Properties</RouterLink>
+                        <RouterLink :to="{ name: 'user-properties', params:{id:userData.id}}"> My Properties</RouterLink>
                     </p>
                   </div>
                 </div>
