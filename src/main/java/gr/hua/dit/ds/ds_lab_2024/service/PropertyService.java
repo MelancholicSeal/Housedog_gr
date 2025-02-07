@@ -78,7 +78,10 @@ public class PropertyService {
         propertyRepository.save(property);
     }
 
-
+    @Transactional
+    public void delete(int propertyId) {
+        propertyRepository.deleteById(propertyId);
+    }
 
 
 

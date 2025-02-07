@@ -83,7 +83,11 @@ public class PropertyRestController {
         propertyService.updateProperty(property);
         return property;
     }
-    
+
+    @DeleteMapping("/{property_id}")
+    public void deleteProperty(@PathVariable int property_id) {
+        propertyService.delete(property_id);
+    }
 
     /*
     @PostMapping("/new")
