@@ -3,10 +3,12 @@ import {onMounted, ref, watch} from 'vue';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
+const { userData } = useApplicationStore();
 
 const urlRef = ref(backendEnvVar + '/api/property?page=0&size=100');
 const urlRefCity = ref(backendEnvVar + '/api/property/cities');
 const urlRefType = ref(backendEnvVar + '/api/property/types');
+const urlRole = ref(backendEnvVar + '/api/users/' + userData.id);
 const authRef = ref(true);
 const data = ref(null);
 const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
@@ -14,6 +16,8 @@ const cities = ref(null);
 const {loading2, performRequest: CitiesData } = useRemoteData(urlRefCity, authRef,cities);
 const propertytypes = ref(null);
 const {loading3, performRequest: PropertyTypeData } = useRemoteData(urlRefType, authRef, propertytypes);
+const role_data = ref(null);
+const {loading4, performRequest: UserRoleData } = useRemoteData(urlRole, authRef, role_data);
 
 const selectedCities = ref([]);
 const selectedTypes = ref([]);
@@ -24,12 +28,26 @@ onMounted(() => {
   CitiesData();
   PropertyData();
   PropertyTypeData();
+  UserRoleData();
   console.log(data);
 });
 
 const applicationStore = useApplicationStore();
 const userRoles = applicationStore.userData.roles;
 console.log(userRoles);
+
+const onSubmit = (id) => {
+  const urlRefDelete = ref(backendEnvVar + + '/api/property' + id);
+  const methodRef = ref('DELETE');
+  const {loading5, performRequest: DeleteProperty } = useRemoteData(urlRefDelete, authRef, methodRef, data);
+  DeleteProperty()
+      .then((res) => {
+        console.log('Deleted Successfully!', res);
+      })
+      .catch((err) => {
+        console.error('Error creating rent:', err);
+      });
+}
 
 const applyFilters = () => {
   console.log("Applied Filters:");
@@ -146,6 +164,11 @@ const applyFilters = () => {
                                         >
                                             Display
                                         </RouterLink>
+                                    </td>
+                                    <td v-if="data.role === 'ROLE_ADMIN'" v-for="property in data">
+                                      <button @click="onSubmit(property.id)" type ="button" class="btn btn-info btn-sm">
+                                        Delete Property
+                                      </button>
                                     </td>
                                 </tr>
                             </tbody>
