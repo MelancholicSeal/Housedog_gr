@@ -39,7 +39,7 @@ onMounted(() => {
       </thead>
       <tbody v-if="loading">
       <tr>
-        <td colspan="7">Loading...</td>
+        <td colspan="8">Loading...</td>
       </tr>
       </tbody>
       <tbody v-if="data">
@@ -51,6 +51,10 @@ onMounted(() => {
         <td>{{ item.user.lastName}}</td>
         <td>{{ item.user.email}}</td>
         <td>{{ item.user.phoneNumber}}</td>
+        <td>
+          <button @click="acceptRequest(item.id)" class="btn btn-success">Accept</button>
+          <button @click="rejectRequest(item.id)" class="btn btn-danger">Reject</button>
+        </td>
       </tr>
       </tbody>
     </table>
