@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("owner")
 public class Owner extends User {
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Property> Properties;
 
     public Owner(String username, String email, String password,
