@@ -34,10 +34,7 @@ public class RentRestController {
         return rent;
     }
 
-    @PutMapping("/accept")
-    public void acceptRent(@PathVariable int id) {
 
-    }
 
     @GetMapping("/requests/{owner_id}")
     public List<Rent> getRentRequests(@PathVariable Long owner_id) {
