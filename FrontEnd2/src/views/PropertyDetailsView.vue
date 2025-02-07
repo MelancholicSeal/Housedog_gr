@@ -77,7 +77,7 @@ onMounted(() => {
                 </tr>
                 <tr>
                   <th></th>
-                  <td>
+                  <td v-if="data.available === true">
                     <button @click="onSubmit" type ="button" class="btn btn-info btn-sm">
                       Rent Property
                     </button>
