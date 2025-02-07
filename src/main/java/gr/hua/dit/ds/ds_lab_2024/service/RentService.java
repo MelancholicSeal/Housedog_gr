@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.ds_lab_2024.service;
 
+import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import gr.hua.dit.ds.ds_lab_2024.entities.Rent;
 import gr.hua.dit.ds.ds_lab_2024.repositories.RentRepository;
 import jakarta.transaction.Transactional;
@@ -32,4 +33,8 @@ public class RentService {
         return rentRepository.findById(rentId).get();
     }
 
+    @Transactional
+    public List<Rent> getRentReqOfOwner(List<Property> Properties) {
+        return  rentRepository.findByPropertyIn(Properties);
+    }
 }

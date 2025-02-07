@@ -2,17 +2,18 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
 // api/users/id     api/property/id
 
 const route = useRoute();
-
-const ownerId = ref(route.params.id);
+const { userData } = useApplicationStore();
+const ownerId = userData.id;
 
 const userIdRef = ref(null);
 const urlRef = computed(() => {
-  return backendEnvVar+'/api/rent/requests/' + userIdRef.value;
+  return backendEnvVar+'/api/rent/requests/' + ownerId;
 });
 
 const authRef = ref(true);
@@ -21,6 +22,7 @@ const { loading, performRequest } = useRemoteData(urlRef, authRef, data);
 
 onMounted(() => {
   performRequest();
+  console.log(data);
 });
 </script>
 
@@ -45,6 +47,7 @@ onMounted(() => {
       </tbody>
       <tbody v-if="data">
       <tr v-for="rent in data">
+
         <td>{{ rent.property.address}}</td>
         <td>{{ rent.property.city}}</td>
         <td>{{ rent.property.type}}</td>

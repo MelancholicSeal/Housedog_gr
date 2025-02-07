@@ -1,6 +1,9 @@
 package gr.hua.dit.ds.ds_lab_2024.controllers;
 
+import gr.hua.dit.ds.ds_lab_2024.entities.Owner;
+import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import gr.hua.dit.ds.ds_lab_2024.entities.Rent;
+import gr.hua.dit.ds.ds_lab_2024.service.OwnerService;
 import gr.hua.dit.ds.ds_lab_2024.service.PropertyService;
 import gr.hua.dit.ds.ds_lab_2024.service.RentService;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RentRestController {
     
     private RentService rentService;
-    private PropertyService propertyService;
+    private OwnerService ownerService;
 
     public RentRestController(RentService rentService) {
         this.rentService = rentService;
@@ -29,6 +32,18 @@ public class RentRestController {
     public Rent createRent(@RequestBody Rent rent) {
         rentService.saveRent(rent);
         return rent;
+    }
+
+    @PutMapping("/accept")
+    public void acceptRent(@PathVariable int id) {
+
+    }
+
+    @GetMapping("/requests/{id}")
+    public List<Rent> getRentRequests(@PathVariable Long id) {
+        Owner owner = ownerService.getOwner(id);
+        List<Property> Properties = ownerService.getProperties(owner);
+        return rentService.getRentReqOfOwner(Properties);
     }
 
     
