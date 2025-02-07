@@ -108,6 +108,11 @@ const router = createRouter({
             path: '/requests',
             name: 'requests',
             component: () => import('../views/RequestsView.vue'),
+        },
+        {
+            path: '/userList',
+            name: 'userList',
+            component: () => import('../views/AdminUsersView.vue')
         }
     ]
 });

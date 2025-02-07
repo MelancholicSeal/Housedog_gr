@@ -28,6 +28,15 @@ const applicationStore = useApplicationStore();
                       >
                     </li>
 
+                    <li
+                        class="nav-item"
+                        v-if="applicationStore.isAuthenticated === true && applicationStore.userData?.roles?.includes('ROLE_ADMIN')"
+                    >
+                      <router-link :to="{ name: 'userList'}" class="nav-link text-white"
+                      >Users</router-link
+                      >
+                    </li>
+
                     <li class="nav-item" v-if="applicationStore.isAuthenticated === true">
                         <router-link :to="{ name: 'home' }" class="nav-link text-white"
                             >Home</router-link
