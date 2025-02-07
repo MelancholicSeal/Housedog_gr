@@ -19,8 +19,8 @@ public class RentRestController {
     private RentService rentService;
     private OwnerService ownerService;
 
-    public RentRestController(RentService rentService) {
-        this.rentService = rentService;
+    public RentRestController(RentService rentService, OwnerService ownerService) {
+        this.rentService = rentService;this.ownerService=ownerService;
     }
 
     @GetMapping("")
@@ -39,9 +39,9 @@ public class RentRestController {
 
     }
 
-    @GetMapping("/requests/{id}")
-    public List<Rent> getRentRequests(@PathVariable Long id) {
-        Owner owner = ownerService.getOwner(id);
+    @GetMapping("/requests/{owner_id}")
+    public List<Rent> getRentRequests(@PathVariable Long owner_id) {
+        Owner owner = ownerService.getOwner(owner_id);
         List<Property> Properties = ownerService.getProperties(owner);
         return rentService.getRentReqOfOwner(Properties);
     }
@@ -50,6 +50,17 @@ public class RentRestController {
     @GetMapping("/{id}")
     public Rent getRentId(@PathVariable int id) {
         return rentService.getRent(id);
+    }
+
+
+    @PutMapping("/accept/{id}")
+    public void acceptRent(@PathVariable int id, @RequestBody Rent rent) {
+
+    }
+
+    @PutMapping("/reject/{id}")
+    public void rejectRent(@PathVariable int id, @RequestBody Rent rent) {
+
     }
     
 }

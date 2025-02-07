@@ -1,22 +1,24 @@
-<script>
+<script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
-const route = useRoute();
+const { userData } = useApplicationStore();
 
-const userIdRef = ref(route.params.id);
-const urlRef = computed(() => {
-  return backendEnvVar +'/api/rent/requests/' + userIdRef.value;
-});
 
+const urlRef =  ref(backendEnvVar +'/api/rent/requests/' + userData.id);
 const authRef = ref(true);
 const data = ref(null);
-const { loading, performRequest } = useRemoteData(urlRef, authRef, data);
+console.log(urlRef);
+const { loading, performRequest: GetData } = useRemoteData(urlRef, authRef, data);
 
 onMounted(() => {
-  performRequest();
+
+  console.log(urlRef);
+  GetData();
+
 });
 </script>
 
