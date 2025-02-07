@@ -2,18 +2,13 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
-import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
-// api/users/id     api/property/id
-
 const route = useRoute();
-const { userData } = useApplicationStore();
-const ownerId = userData.id;
 
-const userIdRef = ref(null);
+const userIdRef = ref(route.params.id);
 const urlRef = computed(() => {
-  return backendEnvVar+'/api/rent/requests/' + ownerId;
+  return backendEnvVar +'/api/rent/requests/' + userIdRef.value;
 });
 
 const authRef = ref(true);
@@ -22,7 +17,6 @@ const { loading, performRequest } = useRemoteData(urlRef, authRef, data);
 
 onMounted(() => {
   performRequest();
-  console.log(data);
 });
 </script>
 
@@ -35,25 +29,26 @@ onMounted(() => {
         <th>Property Address</th>
         <th>Property City</th>
         <th>Property Type</th>
-        <th>Renter Name</th>
+        <th>Renter First Name</th>
+        <th>Renter Last Name</th>
         <th>Renter Email</th>
         <th>Renter Phone Number</th>
       </tr>
       </thead>
       <tbody v-if="loading">
       <tr>
-        <td colspan="6">Loading...</td>
+        <td colspan="7">Loading...</td>
       </tr>
       </tbody>
       <tbody v-if="data">
-      <tr v-for="rent in data">
-
-        <td>{{ rent.property.address}}</td>
-        <td>{{ rent.property.city}}</td>
-        <td>{{ rent.property.type}}</td>
-        <td>{{ rent.user.username}}</td>
-        <td>{{ rent.user.email}}</td>
-        <td>{{ rent.user.phoneNumber}}</td>
+      <tr v-for="item in data">
+        <td>{{ item.property.address}}</td>
+        <td>{{ item.property.city}}</td>
+        <td>{{ item.property.type}}</td>
+        <td>{{ item.user.firstName}}</td>
+        <td>{{ item.user.lastName}}</td>
+        <td>{{ item.user.email}}</td>
+        <td>{{ item.user.phoneNumber}}</td>
       </tr>
       </tbody>
     </table>
