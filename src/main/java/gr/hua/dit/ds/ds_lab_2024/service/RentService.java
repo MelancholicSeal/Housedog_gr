@@ -37,4 +37,16 @@ public class RentService {
     public List<Rent> getRentReqOfOwner(List<Property> Properties) {
         return  rentRepository.findByPropertyIn(Properties);
     }
+
+    @Transactional
+    public void delete(int id) {
+        rentRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void update(Rent rent) {
+        rentRepository.save(rent);
+    }
+
+
 }

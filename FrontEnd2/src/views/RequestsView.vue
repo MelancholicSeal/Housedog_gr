@@ -15,12 +15,14 @@ console.log(urlRef);
 const { loading, performRequest: GetData } = useRemoteData(urlRef, authRef, data);
 
 const acceptRequest = (id) => {
-  const urlRefAccept = ref(backendEnvVar + '/accept/' + id);
+  const urlRefAccept = ref(backendEnvVar + '/api/rent/accept/' + id);
   const methodRef = ref('PUT');
-  const {loading1, performRequest: AcceptRequest } = useRemoteData(urlRefAccept, authRef, methodRef, data);
+  console.log(urlRefAccept);
+  const {loading1, performRequest: AcceptRequest } = useRemoteData(urlRefAccept, authRef, data, methodRef);
   AcceptRequest()
       .then((res) => {
         console.log('Request Accepted!', res);
+        GetData();
       })
       .catch((err) => {
         console.error('Error accepting request:', err);
@@ -28,12 +30,13 @@ const acceptRequest = (id) => {
 }
 
 const rejectRequest = (id) => {
-  const urlRefReject = ref(backendEnvVar + '/reject/' + id);
+  const urlRefReject = ref(backendEnvVar + '/api/rent/reject/' + id);
   const methodRef = ref('PUT');
-  const {loading2, performRequest: RejectRequest } = useRemoteData(urlRefReject, authRef, methodRef, data);
+  const {loading2, performRequest: RejectRequest } = useRemoteData(urlRefReject, authRef, data, methodRef);
   RejectRequest()
       .then((res) => {
         console.log('Request Rejected!', res);
+        GetData();
       })
       .catch((err) => {
         console.error('Error rejecting request:', err);

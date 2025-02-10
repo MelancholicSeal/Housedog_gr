@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.ds_lab_2024.controllers;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import gr.hua.dit.ds.ds_lab_2024.entities.Owner;
 import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import gr.hua.dit.ds.ds_lab_2024.entities.Rent;
@@ -7,6 +8,8 @@ import gr.hua.dit.ds.ds_lab_2024.service.OwnerService;
 import gr.hua.dit.ds.ds_lab_2024.service.PropertyService;
 import gr.hua.dit.ds.ds_lab_2024.service.RentService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,13 +54,23 @@ public class RentRestController {
 
 
     @PutMapping("/accept/{id}")
-    public void acceptRent(@PathVariable int id, @RequestBody Rent rent) {
-
+    public void acceptRent(@PathVariable int id) {
+        Rent rent = rentService.getRent(id);
+        rent.setRented(true);
+        rentService.update(rent);
+        Property prop = rent.getProperty();
+        prop.setAvailable(false);
+        List<Property> property= new ArrayList<>();
+        property.add(prop);
+        List<Rent> delRents = rentService.getRentReqOfOwner(property);
+        for(Rent r : delRents) {
+            rejectRent(r.getId());
+        }
     }
 
     @PutMapping("/reject/{id}")
-    public void rejectRent(@PathVariable int id, @RequestBody Rent rent) {
-
+    public void rejectRent(@PathVariable int id) {
+        rentService.delete(id);
     }
     
 }

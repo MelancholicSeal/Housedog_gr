@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface RentRepository extends JpaRepository<Rent, Integer> {
     List<Rent> findByPropertyIn(List<Property> properties);
+
+
 }

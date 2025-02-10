@@ -3,7 +3,9 @@ package gr.hua.dit.ds.ds_lab_2024.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "property_id"})
+)
 public class Rent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
