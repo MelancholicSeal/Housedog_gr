@@ -48,7 +48,7 @@ const onSubmit = (id) => {
         <div class="col-12">
           <div class="mb-4">
             <RouterLink class="small" :to="{ name: 'home' }">Back to Home</RouterLink>
-            <h1 class="fs-3">Properties</h1>
+            <h1 class="fs-3">Users</h1>
           </div>
           <div>
             <table class="table">
