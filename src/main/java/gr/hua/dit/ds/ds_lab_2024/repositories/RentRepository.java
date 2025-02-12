@@ -14,4 +14,6 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
 
 
     List<Rent> findByUser(User user);
+
+    List<Rent> findByPropertyInAndRented(List<Property> properties, boolean b);
 }

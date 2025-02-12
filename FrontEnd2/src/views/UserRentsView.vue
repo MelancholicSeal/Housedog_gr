@@ -21,6 +21,7 @@ const userIdRef = ref(null);
 onMounted(() => {
   GetData();
   userIdRef.value = route.params.id;
+  console.log(data);
 });
 </script>
 
