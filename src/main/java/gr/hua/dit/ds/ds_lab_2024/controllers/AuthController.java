@@ -83,6 +83,48 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
+        if(signUpRequest.getUsername().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username cannot be empty"));
+        }
+        if(signUpRequest.getEmail().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email cannot be empty"));
+        }
+        if(signUpRequest.getPassword().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Password cannot be empty"));
+        }
+        if(signUpRequest.getFirstName().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: First Name cannot be empty"));
+        }
+        if(signUpRequest.getLastName().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Last Name cannot be empty"));
+        }
+        if(signUpRequest.getPhoneNumber().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Phone Number cannot be empty"));
+        }
+        if(signUpRequest.getAFM().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: AFM cannot be empty"));
+        }
+        if(signUpRequest.getIdNumber().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: ID Number be empty"));
+        }
+
+
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
