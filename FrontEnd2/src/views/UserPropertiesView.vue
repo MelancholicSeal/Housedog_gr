@@ -78,8 +78,6 @@ const addNewProperty = () => {
         </table>
     </div>
     <div>
-      <router-link :to="{ name: 'property-new'}" class="nav-link text-white"
-      >Add Property</router-link
-      >
+      <router-link :to="{ name: 'property-new'}" class="nav-link text-white">Add Property</router-link>
     </div>
 </template>
