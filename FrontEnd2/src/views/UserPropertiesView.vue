@@ -18,7 +18,7 @@ const authRef = ref(true);
 const data = ref(null);
 const { loading, performRequest } = useRemoteData(urlRef, authRef, data);
 
-if (!userData?.roles.includes('OWNER_ROLE')) {
+if (!userData?.roles.includes('ROLE_OWNER')) {
   router.push({ name: 'home' });
 }
 

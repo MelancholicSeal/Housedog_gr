@@ -36,7 +36,7 @@ const onSubmit = () => {
             // TODO Handle error.
         });
 };
-if (!userData?.roles.includes('OWNER_ROLE')) {
+if (!userData?.roles.includes('ROLE_OWNER')) {
   router.push({ name: 'home' });
 }
 </script>

@@ -25,9 +25,7 @@ const { performRequest: performRequestDelete } = useRemoteData(
     ref('DELETE')
 );
 
-if (!userData?.roles.includes('OWNER_ROLE') && !userData?.roles.includes('ADMIN_ROLE')) {
-  router.push({ name: 'home' });
-}
+
 
 onMounted(() => {
     propertyIdRef.value = route.params.id;

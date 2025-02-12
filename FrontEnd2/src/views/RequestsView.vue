@@ -1,13 +1,13 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 import {useApplicationStore} from "@/stores/application.js";
+import {useRouter} from "vue-router";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
 
 const { userData } = useApplicationStore();
 
-
+const router = useRouter();
 const urlRef =  ref(backendEnvVar +'/api/rent/requests/' + userData.id);
 const authRef = ref(true);
 const data = ref(null);
@@ -43,7 +43,7 @@ const rejectRequest = (id) => {
       });
 }
 
-if (!userData?.roles.includes('OWNER_ROLE')) {
+if (!userData?.roles.includes('ROLE_OWNER')) {
   router.push({ name: 'home' });
 }
 
