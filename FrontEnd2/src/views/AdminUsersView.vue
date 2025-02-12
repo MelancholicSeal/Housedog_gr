@@ -13,6 +13,10 @@ const {loading, performRequest: UserData } = useRemoteData(urlRef, authRef,data)
 const role_data = ref(null);
 const {loading2, performRequest: UserRoleData } = useRemoteData(urlRole, authRef, role_data);
 
+if (!userData?.roles.includes('ADMIN_ROLE')) {
+  router.push({ name: 'home' });
+}
+
 onMounted(() => {
   UserData();
   UserRoleData();

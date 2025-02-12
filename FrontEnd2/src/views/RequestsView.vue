@@ -43,6 +43,10 @@ const rejectRequest = (id) => {
       });
 }
 
+if (!userData?.roles.includes('OWNER_ROLE')) {
+  router.push({ name: 'home' });
+}
+
 onMounted(() => {
 
   console.log(urlRef);

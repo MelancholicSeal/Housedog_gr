@@ -2,7 +2,9 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
+const { userData } = useApplicationStore();
 
 const router = useRouter();
 const route = useRoute();
@@ -15,6 +17,10 @@ const urlRef = computed(() => {
 const authRef = ref(true);
 const data = ref(null);
 const { loading, performRequest } = useRemoteData(urlRef, authRef, data);
+
+if (!userData?.roles.includes('OWNER_ROLE')) {
+  router.push({ name: 'home' });
+}
 
 onMounted(() => {
     userIdRef.value = route.params.id;
@@ -35,7 +41,6 @@ const updatePropertyAvailability = (propertyId, updatedAvailability) => {
 const addNewProperty = () => {
   router.push({ name: 'property-new' });
 };
-
 </script>
 
 <template>

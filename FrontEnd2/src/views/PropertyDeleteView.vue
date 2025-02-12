@@ -2,7 +2,9 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
+import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
+const { userData } = useApplicationStore();
 
 const router = useRouter();
 const route = useRoute();
@@ -22,6 +24,10 @@ const { performRequest: performRequestDelete } = useRemoteData(
     ref(true),
     ref('DELETE')
 );
+
+if (!userData?.roles.includes('OWNER_ROLE') && !userData?.roles.includes('ADMIN_ROLE')) {
+  router.push({ name: 'home' });
+}
 
 onMounted(() => {
     propertyIdRef.value = route.params.id;

@@ -12,10 +12,14 @@ const data = ref(null);
 console.log(urlRef);
 const {loading, performRequest: getUserData} = useRemoteData(urlRef, authRef,data);
 
+const profileId = route.params.id;
+if (userData?.id !== profileId) {
+  router.push({ name: 'home' });
+}
+
 onMounted(() => {
   getUserData();
 });
-
 </script>
 
 <template>

@@ -4,10 +4,11 @@ import { useRemoteData } from '@/composables/useRemoteData.js';
 import { useRouter } from 'vue-router';
 import { useApplicationStore } from '@/stores/application.js';
 const backendEnvVar = import.meta.env.VITE_BACKEND;
+const { userData } = useApplicationStore();
 
 const router = useRouter();
 const applicationStore = useApplicationStore();
-const userId = applicationStore.userData?.id;
+const userId = applicationStore.userData.id;
 
 
 // @EXERCISE : Add teacher (dropdown - load data [background], pre-process data, show data in dropdown)
@@ -35,6 +36,9 @@ const onSubmit = () => {
             // TODO Handle error.
         });
 };
+if (!userData?.roles.includes('OWNER_ROLE')) {
+  router.push({ name: 'home' });
+}
 </script>
 
 <template>
@@ -43,9 +47,6 @@ const onSubmit = () => {
             <div class="row py-4 px-3">
                 <div class="col-12">
                     <div class="mb-4">
-                        <RouterLink class="small" :to="{ name: 'properties' }"
-                            >Back to Properties</RouterLink
-                        >
                         <h1 class="fs-3">New Property</h1>
                     </div>
                     <div>
