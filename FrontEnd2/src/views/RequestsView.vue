@@ -58,7 +58,7 @@ onMounted(() => {
         <div class="col-12">
           <div class="mb-4">
             <RouterLink class="small" :to="{ name: 'home' }">Back to Home</RouterLink>
-            <h1 class="fs-3">Users</h1>
+            <h1 class="fs-3">Rent Requests</h1>
           </div>
           <div>
             <table class="table">
