@@ -46,7 +46,8 @@ onMounted(() => {
         <td>{{ row.property.city }}</td>
         <td>{{ row.property.type }}</td>
         <td>{{ row.property.owner.username }}</td>
-        <td>{{ row.rented}}</td>
+        <td v-if="row.rented === 'true'">Accepted</td>
+        <td v-else>Pending</td>
       </tr>
       </tbody>
     </table>
