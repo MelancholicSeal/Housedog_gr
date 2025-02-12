@@ -104,6 +104,11 @@ onBeforeMount(() => {
                                 >as {{ credentials.username }}</span
                             >
                         </button>
+                        <div>
+                          <RouterLink :to="{name: 'signup'}">
+                            Create New Account
+                          </RouterLink>
+                        </div>
                     </form>
                 </div>
             </div>

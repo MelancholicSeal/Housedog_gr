@@ -24,7 +24,7 @@ const credentials = ref({
 const errorMessage = ref('');
 
 const onRoleChange = (event) => {
-  credentials._rawValue.role = event.target.checked ? ["Owner"] : ["User"];
+  credentials.value.role = event.target.checked ? ["Owner"] : ["User"];
 };
 
 const onFormSubmit = () => {
@@ -181,9 +181,8 @@ onBeforeMount(() => {
                       <div>
                         <label>
                           <input type="checkbox" @change="onRoleChange"/>
-                          Role:
+                          Role: {{ credentials.role[0] }}
                         </label>
-                        <p>Checkbox value: {{ credentials.role }}</p>
                       </div>
                         <button @click="onFormSubmit" type="submit" class="btn btn-primary">
                             Sign Up
