@@ -7,6 +7,7 @@ import gr.hua.dit.ds.ds_lab_2024.entities.Rent;
 import gr.hua.dit.ds.ds_lab_2024.service.OwnerService;
 import gr.hua.dit.ds.ds_lab_2024.service.PropertyService;
 import gr.hua.dit.ds.ds_lab_2024.service.RentService;
+import gr.hua.dit.ds.ds_lab_2024.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,12 +19,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 @RequestMapping("/api/rent")
 public class RentRestController {
-    
+
+    private final UserService userService;
     private RentService rentService;
     private OwnerService ownerService;
 
-    public RentRestController(RentService rentService, OwnerService ownerService) {
-        this.rentService = rentService;this.ownerService=ownerService;
+    public RentRestController(RentService rentService, OwnerService ownerService, UserService userService) {
+        this.rentService = rentService;
+        this.ownerService=ownerService;
+        this.userService = userService;
     }
 
     @GetMapping("")
@@ -44,6 +48,11 @@ public class RentRestController {
         Owner owner = ownerService.getOwner(owner_id);
         List<Property> Properties = ownerService.getProperties(owner);
         return rentService.getRentReqOfOwner(Properties);
+    }
+
+    @GetMapping("/requestsofuser/{user_id}")
+    public List<Rent> getRentRequestsUser(@PathVariable Long user_id) {
+        return rentService.getRentReqOfUser(userService.getUser(user_id));
     }
 
     

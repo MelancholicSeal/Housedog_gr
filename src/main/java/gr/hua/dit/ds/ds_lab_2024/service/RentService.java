@@ -2,6 +2,7 @@ package gr.hua.dit.ds.ds_lab_2024.service;
 
 import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import gr.hua.dit.ds.ds_lab_2024.entities.Rent;
+import gr.hua.dit.ds.ds_lab_2024.entities.User;
 import gr.hua.dit.ds.ds_lab_2024.repositories.RentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +50,7 @@ public class RentService {
     }
 
 
+    public List<Rent> getRentReqOfUser(User user) {
+        return  rentRepository.findByUser(user);
+    }
 }
