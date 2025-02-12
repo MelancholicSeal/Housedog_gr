@@ -32,10 +32,17 @@ const updatePropertyAvailability = (propertyId, updatedAvailability) => {
   performUpdate();
 };
 
+const addNewProperty = () => {
+  router.push({ name: 'property-new' });
+};
+
 </script>
 
 <template>
     <div>
+      <template>
+        <button @click="addNewProperty">Add Property</button>
+      </template>
         <table class="table">
             <thead>
                 <tr>
@@ -66,5 +73,10 @@ const updatePropertyAvailability = (propertyId, updatedAvailability) => {
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div>
+      <router-link :to="{ name: 'property-new'}" class="nav-link text-white"
+      >Add Property</router-link
+      >
     </div>
 </template>
