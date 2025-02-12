@@ -95,7 +95,6 @@ const applyFilters = () => {
             <div class="row py-4 px-3">
                 <div class="col-12">
                     <div class="mb-4">
-                        <RouterLink class="small" :to="{ name: 'home' }">Back to Home</RouterLink>
                         <h1 class="fs-3">Properties</h1>
                         <RouterLink class="small" :to="{ name: 'property-new' }" v-if="userRoles === 'ROLE_OWNER'"
                             >Create Property</RouterLink>
