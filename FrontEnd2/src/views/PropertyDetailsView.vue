@@ -22,9 +22,8 @@ const data = ref(null);
 const rent_data = ref(null);
 const methodRef = ref('POST');
 const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
-
-
-
+const message = ref(''); // Reactive variable for notification message
+const showMessage = ref(false)
 
 const onSubmit = () => {
   const formDataRef = ref({
@@ -40,9 +39,13 @@ const onSubmit = () => {
   RentData()
       .then((response) => {
         console.log('Rent created successfully:', response);
+        message.value = 'Rent request submitted successfully!';
+        showMessage.value = true;
       })
       .catch((err) => {
         console.error('Error creating rent:', err);
+        message.value = 'An error occurred while submitting rent:';
+        showMessage.value = true;
       });
 }
 
@@ -85,6 +88,18 @@ onMounted(() => {
                 </tr>
             </tbody>
         </table>
-        <pre>{{ data }}</pre>
+      <div v-if="showMessage" class="alert alert-info mt-3">
+        {{ message }}
+      </div>
     </div>
 </template>
+
+<style scoped>
+.alert {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+</style>
