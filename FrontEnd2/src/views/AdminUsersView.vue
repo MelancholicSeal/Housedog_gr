@@ -53,15 +53,33 @@ const onSubmit = (id) => {
           <div>
             <table class="table">
               <thead>
-              <tr>
-                <!-- <th>Course ID</th> -->
-                <th>User</th>
-                <th>Action</th>
-              </tr>
+                <tr>
+                  <th>User Id</th>
+                  <th>Username</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>AFM</th>
+                  <th>Id Number</th>
+                  <th>Actions</th>
+                </tr>
               </thead>
+              <tbody v-if="loading">
+                <tr>
+                  <td colspan="9">Loading...</td>
+                </tr>
+              </tbody>
               <tbody v-if="data">
               <tr v-for="user in data">
-                <td>{{ 'User Id: ' + user.id + ", " + 'Username: ' + user.username + ", " + 'First Name: ' + user.firstName + ", " + 'Last Name: ' + user.lastName + ", " + 'Email: ' + user.email + ", " + 'Phone Number: ' + user.phoneNumber + ", " + 'AFM: ' + user.afm + ", " + 'Id Number: ' + user.idnumber}}</td>
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phoneNumber}}</td>
+                <td>{{user.afm}}</td>
+                <td>{{user.idnumber}}</td>
                 <td v-if="userData?.roles?.includes('ROLE_ADMIN')">
                   <button @click="onSubmit(user.id)" type ="button" class="btn btn-info btn-sm">
                     Delete User

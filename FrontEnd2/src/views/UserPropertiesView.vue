@@ -40,9 +40,7 @@ const addNewProperty = () => {
 
 <template>
     <div>
-      <template>
         <button @click="addNewProperty">Add Property</button>
-      </template>
         <table class="table">
             <thead>
                 <tr>
