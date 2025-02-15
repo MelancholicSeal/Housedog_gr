@@ -28,14 +28,18 @@ onMounted(() => {
     console.log(data);
 });
 
-const updatePropertyAvailability = (propertyId, updatedAvailability) => {
+const updatePropertyAvailability = (propertyId, isChecked) => {
   const updateUrlRef = ref(`${backendEnvVar}/api/property/${propertyId}/changeAvailability`);
   const updateMethodRef = ref('PUT');
-  const updateBodyRef = ref({ propertyId });
-
-  const { performRequest: performUpdate } = useRemoteData(updateUrlRef, authRef, ref(null), updateMethodRef, updateBodyRef);
-
+  const updateBodyRef = ref({propertyId});
+  const {performRequest: performUpdate} = useRemoteData(updateUrlRef, authRef, ref(null), updateMethodRef, updateBodyRef);
   performUpdate();
+  if (isChecked){
+    const urlRefDelete = ref(backendEnvVar + '/api/rent/delete/' + propertyId);
+    const methodRefDelete = ref('PUT');
+    const {loading2, performRequest: DeleteRent } = useRemoteData(urlRefDelete, authRef, data, methodRefDelete);
+    DeleteRent();
+  }
 };
 
 const addNewProperty = () => {
