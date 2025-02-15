@@ -36,6 +36,7 @@ const updatePropertyAvailability = (propertyId, isChecked) => {
   performUpdate();
   if (isChecked){
     const urlRefDelete = ref(backendEnvVar + '/api/rent/delete/' + propertyId);
+    console.log(urlRefDelete);
     const methodRefDelete = ref('PUT');
     const {loading2, performRequest: DeleteRent } = useRemoteData(urlRefDelete, authRef, data, methodRefDelete);
     DeleteRent();
@@ -81,7 +82,5 @@ const addNewProperty = () => {
             </tbody>
         </table>
     </div>
-    <div>
-      <router-link :to="{ name: 'property-new'}" class="nav-link text-white">Add Property</router-link>
-    </div>
+
 </template>

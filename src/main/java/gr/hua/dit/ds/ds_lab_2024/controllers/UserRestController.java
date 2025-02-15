@@ -43,6 +43,8 @@ public class UserRestController {
         if (user == null) {
             throw new RuntimeException("User not found with ID: " + user_id);
         }
+        user.setAFM("*******");
+        user.setIdNumber("*******");
         return user;
     }
 

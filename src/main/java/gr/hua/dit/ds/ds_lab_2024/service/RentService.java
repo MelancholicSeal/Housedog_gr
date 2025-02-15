@@ -35,8 +35,8 @@ public class RentService {
     }
 
     @Transactional
-    public List<Rent> getRentReqOfOwner(List<Property> Properties) {
-        return  rentRepository.findByPropertyInAndRented(Properties, false);
+    public List<Rent> getRentReqOfOwner(List<Property> Properties, boolean check) {
+        return  rentRepository.findByPropertyInAndRented(Properties, check);
     }
 
     @Transactional

@@ -90,8 +90,6 @@ if (!userData?.roles.includes('ROLE_OWNER')) {
                             </button>
                         </div>
                     </div>
-                    <pre>{{ formDataRef }}</pre>
-                    <pre>{{ data }}</pre>
                 </div>
             </div>
         </div>

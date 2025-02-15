@@ -1,5 +1,6 @@
 package gr.hua.dit.ds.ds_lab_2024.controllers;
 
+import gr.hua.dit.ds.ds_lab_2024.entities.Owner;
 import gr.hua.dit.ds.ds_lab_2024.entities.Property;
 import gr.hua.dit.ds.ds_lab_2024.service.PropertyService;
 import org.springframework.ui.Model;
@@ -24,8 +25,17 @@ public class PropertyRestController {
 
     @GetMapping()
     public List<Property> showProperties(Model model) {
-        return propertyService.getProperty();
+        List<Property> props = propertyService.getProperty();
+        //Don't send sensitive user info
+        props.forEach(property -> {
+            Owner owner = property.getOwner();
+            owner.setAFM("*******");
+            owner.setIdNumber("*******");
+            property.setOwner(owner);
+        });
+        return props;
     }
+
 
     @GetMapping("/filter")
     public List<Property> filterProperties(
@@ -33,8 +43,16 @@ public class PropertyRestController {
             @RequestParam(required = false) List<String> types,
             @RequestParam(required = false) Boolean available
     ) {
-        System.out.println("cities: " + cities);
-        return propertyService.searchProperty(cities,available,types);
+
+        List<Property> props = propertyService.searchProperty(cities,available,types);
+        //Don't send sensitive user info
+        props.forEach(property -> {
+            Owner owner = property.getOwner();
+            owner.setAFM("*******");
+            owner.setIdNumber("*******");
+            property.setOwner(owner);
+        });
+        return props;
     }
 
     @GetMapping("/cities")
@@ -62,6 +80,7 @@ public class PropertyRestController {
         return property;
     }
 
+    //Useless??
     @PutMapping("/{property_id}")
     public Property updateProperty(@PathVariable int property_id, @RequestBody Property propertyDetails) {
         Property property = (Property) propertyService.getProperty(property_id);
