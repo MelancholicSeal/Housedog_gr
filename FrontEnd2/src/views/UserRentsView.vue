@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import {useRoute, useRouter} from 'vue-router';
 import { useRemoteData } from '@/composables/useRemoteData.js';
 import {useApplicationStore} from "@/stores/application.js";
 const backendEnvVar = import.meta.env.VITE_BACKEND;
@@ -15,8 +15,13 @@ console.log(urlRef);
 const { loading, performRequest: GetData } = useRemoteData(urlRef, authRef, data);
 
 const route = useRoute();
+const router = useRouter();
 
 const userIdRef = ref(null);
+
+if (userData?.id.toString()!==route.params.id) {
+  router.push({ name: 'home' });
+}
 
 onMounted(() => {
   GetData();
@@ -26,6 +31,10 @@ onMounted(() => {
 </script>
 
 <template>
+  <div class="bg-body-tertiary">
+    <div class="container">
+      <div class="row py-4 px-3">
+        <div class="col-12">
   <div>
     <table class="table">
       <thead>
@@ -51,5 +60,9 @@ onMounted(() => {
       </tr>
       </tbody>
     </table>
+  </div>
+  </div>
+  </div>
+  </div>
   </div>
 </template>

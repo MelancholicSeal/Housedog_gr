@@ -18,7 +18,7 @@ const authRef = ref(true);
 const data = ref(null);
 const { loading, performRequest } = useRemoteData(urlRef, authRef, data);
 
-if (!userData?.roles.includes('ROLE_OWNER')) {
+if (!userData?.roles.includes('ROLE_OWNER') || userData?.id.toString()!==route.params.id) {
   router.push({ name: 'home' });
 }
 
@@ -49,6 +49,10 @@ const addNewProperty = () => {
 </script>
 
 <template>
+  <div class="bg-body-tertiary">
+    <div class="container">
+      <div class="row py-4 px-3">
+        <div class="col-12">
     <div>
         <button @click="addNewProperty">Add Property</button>
         <table class="table">
@@ -82,5 +86,8 @@ const addNewProperty = () => {
             </tbody>
         </table>
     </div>
-
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

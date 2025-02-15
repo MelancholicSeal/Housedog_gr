@@ -37,8 +37,10 @@ public class UserRestController {
         return userService.getUsers();
     }
 
+
     @GetMapping("/{user_id}")
     public User getUser(@PathVariable Long user_id) {
+
         User user = (User) userService.getUser(user_id);
         if (user == null) {
             throw new RuntimeException("User not found with ID: " + user_id);
@@ -67,33 +69,6 @@ public class UserRestController {
         return user;
     }
 
-    @GetMapping("/user/role/delete/{user_id}/{role_id}")
-    public String deleteRolefromUser(@PathVariable Long user_id, @PathVariable Integer role_id){
-        User user = (User) userService.getUser(user_id);
-        Optional<Role> roleOptional = roleRepository.findById(role_id);
-
-        if(roleOptional.isPresent()) {
-            user.getRoles().remove(roleOptional.get());
-            userService.updateUser(user);
-            return "Role removed successfully.";
-        } else {
-            throw new RuntimeException("Role not found.");
-        }
-    }
-
-    @GetMapping("/user/role/add/{user_id}/{role_id}")
-    public String addRoletoUser(@PathVariable Long user_id, @PathVariable Integer role_id){
-        User user = (User) userService.getUser(user_id);
-        Optional<Role> roleOptional = roleRepository.findById(role_id);
-
-        if(roleOptional.isPresent()) {
-            user.getRoles().add(roleOptional.get());
-            userService.updateUser(user);
-            return "Role added successfully.";
-        } else {
-            throw new RuntimeException("Role not found.");
-        }
-    }
 
 
     @DeleteMapping("/{user_id}")

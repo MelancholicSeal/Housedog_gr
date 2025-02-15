@@ -19,14 +19,7 @@ public class OwnerRestController {
         this.ownerService = ownerService;
     }
 
-    //    @PostConstruct
-//    public void setup() {
-//       Teacher t1 = new Teacher("Prof","Mark","Tailor","mark@company.com");
-//       Teacher t2 = new Teacher("Lec","John","Marmor","john@example.com");
-//
-//       teacherService.saveTeacher(t1);
-//       teacherService.saveTeacher(t2);
-//    }
+
 
     @RequestMapping()
     public List <Owner> showOwners(Model model) {

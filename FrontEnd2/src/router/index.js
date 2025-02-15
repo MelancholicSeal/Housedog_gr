@@ -9,19 +9,13 @@ const router = createRouter({
             path: '/',
             name: 'home',
             // component: HomeView,
-            component: () => import('../views/HomeView.vue'),
+            component: () => import('../views/PropertiesView.vue'),
             meta: { requiresAuth: true }
         },
         {
             path: '/profile',
             name: 'profile',
             component: () => import('../views/ProfileView.vue'),
-            meta: { requiresAuth: true }
-        },
-        {
-            path: '/users',
-            name: 'users',
-            component: () => import('../views/UsersView.vue'),
             meta: { requiresAuth: true }
         },
         {
@@ -33,15 +27,8 @@ const router = createRouter({
         {
             path: '/users/:id',
             name: 'user',
-            component: () => import('../views/UserView.vue'),
             meta: { requiresAuth: true },
             children: [
-                {
-                    path: '',
-                    name: 'user-details',
-                    component: () => import('../views/UserDetailsView.vue'),
-                    meta: { requiresAuth: true }
-                },
                 {
                     path: 'property',
                     name: 'user-properties',
@@ -66,18 +53,6 @@ const router = createRouter({
                     path: '',
                     name: 'property-details',
                     component: () => import('../views/PropertyDetailsView.vue'),
-                    meta: { requiresAuth: true }
-                },
-                {
-                    path: 'students',
-                    name: 'property-students',
-                    component: () => import('../views/CourseStudentsView.vue'),
-                    meta: { requiresAuth: true }
-                },
-                {
-                    path: 'delete',
-                    name: 'property-delete',
-                    component: () => import('../views/PropertyDeleteView.vue'),
                     meta: { requiresAuth: true }
                 }
             ]

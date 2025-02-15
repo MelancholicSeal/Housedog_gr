@@ -80,7 +80,7 @@ public class PropertyRestController {
         return property;
     }
 
-    //Useless??
+
     @PutMapping("/{property_id}")
     public Property updateProperty(@PathVariable int property_id, @RequestBody Property propertyDetails) {
         Property property = (Property) propertyService.getProperty(property_id);
@@ -108,19 +108,6 @@ public class PropertyRestController {
         propertyService.delete(property_id);
     }
 
-    /*
-    @PostMapping("/new")
-    public String saveTeacher(@ModelAttribute("course") Property property, Model model) {
-        propertyService.saveProperty(property);
-        model.addAttribute("teachers", propertyService.getProperty());
-        return "teacher/teachers";
-    }
 
-    @GetMapping("/{id}/courses")
-    public String showCourses(@PathVariable("id") Integer id, Model model){
-        Property property = propertyService.getProperty(id);
-        model.addAttribute("courses", property.getCourses());
-        return "course/courses";
-    }*/
 
 }

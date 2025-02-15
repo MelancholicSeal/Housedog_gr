@@ -3,6 +3,7 @@ package gr.hua.dit.ds.ds_lab_2024.config;
 import gr.hua.dit.ds.ds_lab_2024.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -59,7 +60,11 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
-                        .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/api/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/api/property/**").hasRole("ADMIN")
+                        .requestMatchers("/api/property/new").hasRole("OWNER")
+                        .requestMatchers("/api/rent/accept","/api/rent/delete/","api/rent/reject/").hasRole("OWNER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

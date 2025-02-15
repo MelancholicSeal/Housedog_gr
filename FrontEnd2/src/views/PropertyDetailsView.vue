@@ -78,9 +78,9 @@ onMounted(() => {
                   <th>Available</th>
                   <td>{{ data.available }}</td>
                 </tr>
-                <tr>
+                <tr v-if="data.available === true && !applicationStore.userData?.roles?.includes('ROLE_ADMIN')">
                   <th></th>
-                  <td v-if="data.available === true">
+                  <td>
                     <button @click="onSubmit" type ="button" class="btn btn-info btn-sm">
                       Rent Property
                     </button>

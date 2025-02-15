@@ -34,11 +34,6 @@ public class RentRestController {
     }
 
 
-    //Useless ??
-    @GetMapping("")
-    public List<Rent> getAllRents() {
-        return rentService.getRent();
-    }
     
     @PostMapping("/new")
     public Rent createRent(@RequestBody Rent rent) {
@@ -77,11 +72,6 @@ public class RentRestController {
     }
 
 
-    // Useless??
-    @GetMapping("/{id}")
-    public Rent getRentId(@PathVariable int id) {
-        return rentService.getRent(id);
-    }
 
 
     @PutMapping("/accept/{id}")
