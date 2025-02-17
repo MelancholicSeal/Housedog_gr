@@ -74,7 +74,11 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public List<User> getUsers() {
-        return userRepository.findAll();
+        Set<Role> roles = new HashSet<>();
+        Role adminRole = roleRepository.findByName("ROLE_ADMIN")
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        roles.add(adminRole);
+        return userRepository.findByRolesIsNotContaining(roles);
     }
     
     public User getUser(Long userId) {
