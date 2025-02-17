@@ -22,7 +22,7 @@ const data = ref(null);
 const rent_data = ref(null);
 const methodRef = ref('POST');
 const {loading, performRequest: PropertyData } = useRemoteData(urlRef, authRef,data);
-const message = ref(''); // Reactive variable for notification message
+const message = ref('');
 const showMessage = ref(false)
 
 const onSubmit = () => {

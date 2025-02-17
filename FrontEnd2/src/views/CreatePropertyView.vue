@@ -30,7 +30,7 @@ const { loading, performRequest } = useRemoteData(urlRef, authRef,data, methodRe
 const onSubmit = () => {
     performRequest()
         .then((data) => {
-            router.push({ name: 'property' });
+            router.push({ name: 'properties' });
         })
         .catch((ignored) => {
             // TODO Handle error.
